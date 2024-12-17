@@ -3,16 +3,15 @@ package io.soulsong.soulsong.controllers;
 import io.soulsong.soulsong.entities.User;
 import io.soulsong.soulsong.services.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     
-    private UserService userService;
+    private final UserService userService;
     
     public UserController(UserService userService) {
         this.userService = userService;
@@ -21,6 +20,12 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
         return userService.createUser(user);
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers(){
+        List<User> userList = userService.getAllUsers();
+        return ResponseEntity.ok(userList);
     }
     
     

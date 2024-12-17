@@ -5,6 +5,8 @@ import io.soulsong.soulsong.repositories.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     
@@ -18,4 +20,10 @@ public class UserService {
         User savedUser = userRepository.save(user);
         return ResponseEntity.ok(savedUser);
     }
+    
+    public List<User> getAllUsers() {
+        List<User> userList = userRepository.findAll();
+        return userList;
+    }
 }
+

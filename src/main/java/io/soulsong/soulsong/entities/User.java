@@ -1,36 +1,87 @@
 package io.soulsong.soulsong.entities;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     
-    private String first_name;
-    private String last_name;
-    private LocalDate birthday;
-    private String email;
-    private String phone_number;
+    @Column(name = "firstName")
+    private String firstName;
     
-    public User(String first_name, String last_name, LocalDate birthday, String email, String phone_number) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    @Column(name = "lastName")
+    private String lastName;
+    
+    @Column(name = "birthday")
+    private LocalDate birthday;
+    
+    @Column(name = "email")
+    private String email;
+    
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+    
+    // Constructor por defecto (obligatorio para JPA)
+    public User() {
+    }
+    
+    // Constructor personalizado
+    public User(String firstName, String lastName, LocalDate birthday, String email, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthday = birthday;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String getLastName() {
+        return lastName;
+    }
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+    
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
