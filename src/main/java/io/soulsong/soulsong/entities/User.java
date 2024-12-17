@@ -7,12 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
 public class User {
@@ -22,9 +22,15 @@ public class User {
     
     private String first_name;
     private String last_name;
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private String email;
     private String phone_number;
     
-   
+    public User(String first_name, String last_name, LocalDate birthday, String email, String phone_number) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.birthday = birthday;
+        this.email = email;
+        this.phone_number = phone_number;
+    }
 }
