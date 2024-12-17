@@ -1,62 +1,77 @@
 package io.soulsong.soulsong.services;
 
+import io.soulsong.soulsong.dtos.UserDTO;
 import io.soulsong.soulsong.entities.User;
 import io.soulsong.soulsong.repositories.UserRepository;
+import io.soulsong.soulsong.requests.UserRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
     
-    public ResponseEntity<User> createUser(User user){
+    // Crear un usuario
+    public ResponseEntity<UserDTO> createUser(UserRequest userRequest) {
+        User user = new User(
+              userRequest.firstName(),
+              userRequest.lastName(),
+              userRequest.birthday(),
+              userRequest.email(),
+              userRequest.phoneNumber()
+        );
+        
         User savedUser = userRepository.save(user);
-        return ResponseEntity.ok(savedUser);
+        
+        // Convertir a UserDTO y retornar
+        UserDTO userDTO = new UserDTO(
+              savedUser.getId(),
+              savedUser.getFirstName(),
+              savedUser.getLastName(),
+              savedUser.getEmail()
+        );
+        
+        
+        return ResponseEntity.ok(userDTO);
     }
     
-    public List<User> getAllUsers() {
-        List<User> userList = userRepository.findAll();
-        return userList;
+    // Obtener todos los usuarios
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+              .map(user -> new UserDTO(
+                    user.getId(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getEmail()
+              ))
+              .collect(Collectors.toList());
     }
     
-    public void deleteUserById(Long id){
-        Optional<User> userToDelete = userRepository.findById(id);
-        if(userToDelete.isEmpty()){
-            throw new RuntimeException("User not found");
-        }
-        userRepository.deleteById(id);
-    }
-    
-    public ResponseEntity<User> updateUserById(Long id, User updateUserData) {
-        // Buscar el usuario en la base de datos por ID
+    // Obtener un usuario por ID
+    public ResponseEntity<UserDTO> getUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
-        
         if (userOptional.isEmpty()) {
-            throw new RuntimeException("User not found with ID: " + id);
+            return ResponseEntity.notFound().build();
         }
         
-        // Obtener el usuario existente y actualizar sus campos
-        User userToUpdate = userOptional.get();
-        userToUpdate.setFirstName(updateUserData.getFirstName());
-        userToUpdate.setLastName(updateUserData.getLastName());
-        userToUpdate.setBirthday(updateUserData.getBirthday());
-        userToUpdate.setEmail(updateUserData.getEmail());
-        userToUpdate.setPhoneNumber(updateUserData.getPhoneNumber());
+        User user = userOptional.get();
+        UserDTO userDTO = new UserDTO(
+              user.getId(),
+              user.getFirstName(),
+              user.getLastName(),
+              user.getEmail()
+        );
         
-        // Guardar el usuario actualizado
-        User updatedUser = userRepository.save(userToUpdate);
-        
-        // Retornar el usuario actualizado como respuesta
-        return ResponseEntity.ok(updatedUser);
+        return ResponseEntity.ok(userDTO);
     }
-    
 }
-

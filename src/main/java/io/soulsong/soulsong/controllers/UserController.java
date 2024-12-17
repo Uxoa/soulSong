@@ -1,44 +1,36 @@
 package io.soulsong.soulsong.controllers;
 
-import io.soulsong.soulsong.entities.User;
-import io.soulsong.soulsong.repositories.UserRepository;
+import io.soulsong.soulsong.dtos.UserDTO;
+import io.soulsong.soulsong.requests.UserRequest;
 import io.soulsong.soulsong.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     
     private final UserService userService;
-    private final UserRepository userRepository;
     
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userRepository = userRepository;
     }
     
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        return userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserRequest userRequest) {
+        return userService.createUser(userRequest);
     }
     
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(){
-        List<User> userList = userService.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> userList = userService.getAllUsers();
         return ResponseEntity.ok(userList);
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
-        Optional<User> userById = userRepository.findById(id);
-        if (userById.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(userById.get());
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
-    
 }
