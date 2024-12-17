@@ -1,6 +1,7 @@
-# soulSong
+# soulSong - The no gender dating app
 
 App de citas que relaciona a sus usuarios según sus gustos musicales
+y el uso de otras herramientas como la ia
 
 ## Historias de usuario:
 
