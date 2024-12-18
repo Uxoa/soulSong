@@ -13,6 +13,10 @@ y el uso de otras herramientas como la ia
 
 ### Como usuario user:
 - quiero poder crear mis datos de usuario
+- quiero poder crear un perfil
 - quiero poder ver mis datos de usuario
+- quiero poder ver mi perfil
 - quiero poder borrar mis datos de usuario
+- quiero poder borrar mi perfil
 - quiero pode actualizar mis datos de usuario
+- quiero poder actualizar mi perfil
