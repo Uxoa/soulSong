@@ -12,7 +12,7 @@ public class SongEssence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Long trackId;
+    private String trackId;
     private String mood;
     private double energy;
     private double danceability;
@@ -23,7 +23,8 @@ public class SongEssence {
     public SongEssence() {}
     
     // Constructor completo
-    public SongEssence(Long trackId, String mood, double energy, double danceability, double tempo, double acousticness) {
+    public SongEssence(String trackId, String mood, double energy, double danceability,
+                       double tempo, double acousticness) {
         this.trackId = trackId;
         this.mood = mood;
         this.energy = energy;
@@ -41,11 +42,11 @@ public class SongEssence {
         this.id = id;
     }
     
-    public Long getTrackId() {
+    public String getTrackId() {
         return trackId;
     }
     
-    public void setTrackId(Long trackId) {
+    public void setTrackId(String trackId) {
         this.trackId = trackId;
     }
     

@@ -25,9 +25,11 @@ public class InitFakeData {
             );
             
             // Crear SongEssence de prueba
-            SongEssence song1 = new SongEssence(1L, "Happy", 0.8, 0.7, 120.0, 0.1);
-            SongEssence song2 = new SongEssence(2L, "Melancholy", 0.6, 0.5, 100.0, 0.3);
-            SongEssence song3 = new SongEssence(3L, "Energetic", 0.9, 0.8, 140.0, 0.05);
+            SongEssence song1 = new SongEssence("11dFghVXANMlKmJXsNCbNl", "Happy", 0.8, 0.7, 120.0, 0.1);
+            SongEssence song2 = new SongEssence("113rghVXANMlKmJXsNCblp", "Melancholy", 0.6, 0.5,
+                  100.0, 0.3);
+            SongEssence song3 = new SongEssence("31dFghVXANMlKmJXsNCbTf", "Energetic", 0.9, 0.8,
+                  140.0, 0.05);
             
             // Agregar canciones favoritas a los perfiles
             userList.get(0).getProfile().addFavoriteSong(song1);

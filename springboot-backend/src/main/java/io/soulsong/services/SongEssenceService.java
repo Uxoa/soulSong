@@ -19,7 +19,7 @@ public class SongEssenceService {
         this.restTemplate = new RestTemplate();
     }
     
-    public SongEssence getSongEssence(Long trackId) {
+    public SongEssence getSongEssence(String trackId) {
         String token = spotifyAuthService.getAccessToken();
         
         String url = "https://api.spotify.com/v1/audio-features/" + trackId;

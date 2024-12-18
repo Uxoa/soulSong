@@ -19,7 +19,7 @@ public class SongEssenceController {
     }
     
     @GetMapping("/essence")
-    public ResponseEntity<SongEssence> getSongEssence(@RequestParam Long trackId) {
+    public ResponseEntity<SongEssence> getSongEssence(@RequestParam String trackId) {
         SongEssence essence = songEssenceService.getSongEssence(trackId);
         return ResponseEntity.ok(essence);
     }

@@ -1,7 +1,7 @@
 package io.soulsong.dtos;
 
 public record SpotifyDTO(
-      Long trackId,
+      String trackId,
       double energy,
       double danceability,
       double tempo,
