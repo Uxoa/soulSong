@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5a66f66-d540-4c5c-9026-9e8e52596357" name="Changes" comment="" />
+    <list default="true" id="d5a66f66-d540-4c5c-9026-9e8e52596357" name="Changes" comment="Feat: upgrading frontend files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -78,12 +86,26 @@
       <option name="presentableId" value="Default" />
       <updated>1734471359988</updated>
       <workItem from="1734471361159" duration="12681000" />
-      <workItem from="1734484844109" duration="670000" />
+      <workItem from="1734484844109" duration="1124000" />
+      <workItem from="1734485976288" duration="206000" />
     </task>
+    <task id="LOCAL-00001" summary="Feat: upgrading frontend files">
+      <option name="closed" value="true" />
+      <created>1734485871261</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734485871261</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Feat: upgrading frontend files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: upgrading frontend files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
