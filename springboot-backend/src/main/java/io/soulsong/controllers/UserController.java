@@ -50,4 +50,12 @@ public class UserController {
         userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
+    
+    
+    // Buscar usuarios con gustos musicales afines
+    @GetMapping("/{userId}/similar")
+    public ResponseEntity<List<UserDTO>> getSimilarUsers(@PathVariable Long userId) {
+        List<UserDTO> similarUsers = userService.findSimilarUsers(userId);
+        return ResponseEntity.ok(similarUsers);
+    }
 }

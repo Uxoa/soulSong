@@ -1,7 +1,6 @@
 package io.soulsong.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -9,41 +8,34 @@ import java.time.LocalDate;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
     
-    @Column(name = "firstName")
     private String firstName;
-    
-    @Column(name = "lastName")
     private String lastName;
-    
-    @Column(name = "birthday")
     private LocalDate birthday;
-    
-    @Column(name = "email")
     private String email;
-    
-    @Column(name = "phoneNumber")
     private String phoneNumber;
     
-    // Constructor por defecto (obligatorio para JPA)
+    @Embedded
+    private Profile profile;
+    
     public User() {
+        this.profile = new Profile();
     }
     
-    // Constructor personalizado
     public User(String firstName, String lastName, LocalDate birthday, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.profile = new Profile();
     }
     
+    // Getters y Setters
     public Long getId() {
         return id;
     }
-    
     
     public String getFirstName() {
         return firstName;
@@ -83,5 +75,13 @@ public class User {
     
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    
+    public Profile getProfile() {
+        return profile;
+    }
+    
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

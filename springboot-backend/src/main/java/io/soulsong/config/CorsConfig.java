@@ -1,4 +1,4 @@
-package org.example.config;
+package io.soulsong.config;
 
 
 import org.springframework.context.annotation.Bean;

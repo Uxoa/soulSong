@@ -1,6 +1,7 @@
 package io.soulsong.services;
 
 import io.soulsong.dtos.UserDTO;
+import io.soulsong.entities.SongEssence;
 import io.soulsong.entities.User;
 import io.soulsong.repositories.UserRepository;
 import io.soulsong.requests.UserRequest;
@@ -16,12 +17,10 @@ public class UserService {
     
     private final UserRepository userRepository;
     
-    // Constructor para inyección de dependencias
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
     
-    // Crear un usuario
     public ResponseEntity<UserDTO> createUser(UserRequest userRequest) {
         User user = new User(
               userRequest.firstName(),
@@ -37,13 +36,14 @@ public class UserService {
               savedUser.getId(),
               savedUser.getFirstName(),
               savedUser.getLastName(),
-              savedUser.getEmail()
+              savedUser.getEmail(),
+              savedUser.getPhoneNumber(),
+              savedUser.getProfile().getFavoriteSongs()
         );
         
         return ResponseEntity.ok(userDTO);
     }
     
-    // Obtener todos los usuarios
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         
@@ -52,12 +52,13 @@ public class UserService {
                     user.getId(),
                     user.getFirstName(),
                     user.getLastName(),
-                    user.getEmail()
+                    user.getEmail(),
+                    user.getPhoneNumber(),
+                    user.getProfile().getFavoriteSongs()
               ))
               .collect(Collectors.toList());
     }
     
-    // Obtener un usuario por ID
     public ResponseEntity<UserDTO> getUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         
@@ -70,13 +71,14 @@ public class UserService {
               user.getId(),
               user.getFirstName(),
               user.getLastName(),
-              user.getEmail()
+              user.getEmail(),
+              user.getPhoneNumber(),
+              user.getProfile().getFavoriteSongs()
         );
         
         return ResponseEntity.ok(userDTO);
     }
     
-    // Actualizar un usuario
     public ResponseEntity<UserDTO> updateUser(Long id, UserRequest userRequest) {
         Optional<User> userOptional = userRepository.findById(id);
         
@@ -97,20 +99,43 @@ public class UserService {
               updatedUser.getId(),
               updatedUser.getFirstName(),
               updatedUser.getLastName(),
-              updatedUser.getEmail()
+              updatedUser.getEmail(),
+              updatedUser.getPhoneNumber(),
+              updatedUser.getProfile().getFavoriteSongs()
         );
         
         return ResponseEntity.ok(userDTO);
     }
     
-    // Eliminar un usuario por ID
     public void deleteUserById(Long id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        
-        if (userOptional.isEmpty()) {
+        if (!userRepository.existsById(id)) {
             throw new RuntimeException("User with ID " + id + " not found");
         }
         
         userRepository.deleteById(id);
+    }
+    
+    public List<UserDTO> findSimilarUsers(Long userId) {
+        User user = userRepository.findById(userId)
+              .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        List<SongEssence> favoriteSongs = user.getProfile().getFavoriteSongs();
+        
+        List<User> similarUsers = userRepository.findAll().stream()
+              .filter(u -> !u.getId().equals(userId))
+              .filter(u -> u.getProfile().getFavoriteSongs().stream()
+                    .anyMatch(favoriteSongs::contains))
+              .toList();
+        
+        return similarUsers.stream()
+              .map(u -> new UserDTO(
+                    u.getId(),
+                    u.getFirstName(),
+                    u.getLastName(),
+                    u.getEmail(),
+                    u.getPhoneNumber(),
+                    u.getProfile().getFavoriteSongs()
+              ))
+              .toList();
     }
 }

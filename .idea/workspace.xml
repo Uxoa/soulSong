@@ -5,8 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55568ca8-546f-4464-9262-3c6ad8641b8f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react-frontend/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/entities/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/react-frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/.env" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/appointment.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/appointment.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/axios-instance.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/axios-instance.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/pets.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/pets.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/statistics.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/statistics.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/users.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/users.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/appointments/AppointmentForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/appointments/AppointmentForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/hooks/useAppointments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/hooks/useAppointments.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/hooks/usePets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/hooks/usePets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/hooks/useUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/hooks/useUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/vite-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/vite-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/entities/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,6 +162,11 @@
       <workItem from="1734464776486" duration="3001000" />
       <workItem from="1734486073607" duration="109000" />
       <workItem from="1734486188303" duration="21000" />
+      <workItem from="1734509741456" duration="1086000" />
+      <workItem from="1734511892052" duration="76000" />
+      <workItem from="1734512093523" duration="91000" />
+      <workItem from="1734512185976" duration="94000" />
+      <workItem from="1734512540132" duration="213000" />
     </task>
     <servers />
   </component>
