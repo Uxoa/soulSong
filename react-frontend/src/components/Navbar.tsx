@@ -1,18 +1,25 @@
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./Sidebar.css";
+import { Menu, X } from "lucide-react";
+import "./Navbar.css";
 
-const Sidebar = () => {
+const Navbar: React.FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleMenu = () => setIsOpen(!isOpen);
+
     return (
-        <div className="sidebar">
-            <h2 className="sidebar-title">SoulSong</h2>
-            <nav>
-                <ul className="sidebar-links">
+        <header className="navbar">
+            <div className="navbar-logo">SoulSong</div>
+            <button className="burger-menu" onClick={toggleMenu}>
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            <nav className={`navbar-links ${isOpen ? "open" : ""}`}>
+                <ul>
                     <li>
                         <NavLink
                             to="/dashboard"
-                            className={({ isActive }) =>
-                                isActive ? "link active" : "link"
-                            }
+                            className={({ isActive }) => (isActive ? "link active" : "link")}
                         >
                             Dashboard
                         </NavLink>
@@ -20,9 +27,7 @@ const Sidebar = () => {
                     <li>
                         <NavLink
                             to="/users"
-                            className={({ isActive }) =>
-                                isActive ? "link active" : "link"
-                            }
+                            className={({ isActive }) => (isActive ? "link active" : "link")}
                         >
                             Usuarios
                         </NavLink>
@@ -30,9 +35,7 @@ const Sidebar = () => {
                     <li>
                         <NavLink
                             to="/profiles"
-                            className={({ isActive }) =>
-                                isActive ? "link active" : "link"
-                            }
+                            className={({ isActive }) => (isActive ? "link active" : "link")}
                         >
                             Perfiles
                         </NavLink>
@@ -40,17 +43,15 @@ const Sidebar = () => {
                     <li>
                         <NavLink
                             to="/songs"
-                            className={({ isActive }) =>
-                                isActive ? "link active" : "link"
-                            }
+                            className={({ isActive }) => (isActive ? "link active" : "link")}
                         >
                             Canciones
                         </NavLink>
                     </li>
                 </ul>
             </nav>
-        </div>
+        </header>
     );
 };
 
-export default Sidebar;
+export default Navbar;

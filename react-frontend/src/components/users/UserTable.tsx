@@ -22,16 +22,22 @@ const UserTable: React.FC<UserTableProps> = ({ users, onEdit, onDelete }) => {
                     <th className="border px-4 py-2">Last Name</th>
                     <th className="border px-4 py-2">Email</th>
                     <th className="border px-4 py-2">Phone</th>
+                    <th className="border px-4 py-2">Favorite Songs</th>
                     <th className="border px-4 py-2">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {users.map((user) => (
                     <tr key={user.id}>
-                        <td className="border px-4 py-2">{user.firstName}</td>
-                        <td className="border px-4 py-2">{user.lastName}</td>
+                        <td className="border px-4 py-2">{user.name}</td>
+                        <td className="border px-4 py-2">{user.name}</td>
                         <td className="border px-4 py-2">{user.email}</td>
-                        <td className="border px-4 py-2">{user.phoneNumber}</td>
+                        <td className="border px-4 py-2">{user.favoriteSongs}</td>
+                        <td className="border px-4 py-2">
+                            {user.favoriteSongs && user.favoriteSongs.length > 0
+                                ? user.favoriteSongs.join(", ")
+                                : "No favorite songs"}
+                        </td>
                         <td className="border px-4 py-2">
                             <button
                                 onClick={() => onEdit(user.id)}

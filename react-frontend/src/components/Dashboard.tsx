@@ -1,20 +1,26 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import "./Dashboard.css";
 
-const Dashboard: React.FC = () => {
-  return (
-      <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-
-        {/* Contenido Específico del Dashboard */}
-        <div className="bg-blue-100 p-4 mb-6 rounded">
-          <h2 className="text-xl font-bold">Welcome to the Dashboard!</h2>
-          <p className="text-gray-700">
-            Here you can see a summary of our free benefits.
-          </p>
+const Dashboard = () => {
+    return (
+        <div className="dashboard">
+            <h1>Bienvenido a SoulSong</h1>
+            <div className="dashboard-cards">
+                <Link to="/users" className="dashboard-card">
+                    <h3>Usuarios</h3>
+                    <p>Administra los usuarios registrados en la aplicación.</p>
+                </Link>
+                <Link to="/profiles" className="dashboard-card">
+                    <h3>Perfiles</h3>
+                    <p>Explora y administra los perfiles de los usuarios.</p>
+                </Link>
+                <Link to="/songs" className="dashboard-card">
+                    <h3>Canciones</h3>
+                    <p>Descubre y gestiona las canciones favoritas de los usuarios.</p>
+                </Link>
+            </div>
         </div>
-      </div>
-  );
+    );
 };
 
 export default Dashboard;
-

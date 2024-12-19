@@ -1,0 +1,54 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    margin: 0; /* Elimina márgenes */
+    padding: 1.5rem;
+    text-align: center;
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+}
+
+
+.dashboard h1 {
+    font-size: 2rem;
+    color: rgb(244, 162, 97) !important; /* Color primario global */
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Diseño adaptable */
+    gap: 1rem; /* Espaciado entre tarjetas */
+    justify-content: center; /* Centrado horizontal */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 1200px; /* Ancho máximo */
+}
+
+.dashboard-card {
+    background: linear-gradient(145deg, rgb(45, 46, 48), rgb(59, 60, 63)); /* Fondo oscuro con gradiente */
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(244, 162, 97, 0.7);
+}
+
+.dashboard-card h3 {
+    font-size: 1.2rem;
+    color: rgb(67, 97, 107) !important; /* Azul petróleo */
+    margin-bottom: 0.5rem;
+}
+
+.dashboard-card p {
+    font-size: 0.9rem;
+    color: rgb(201, 201, 211);
+    line-height: 1.4;
+}

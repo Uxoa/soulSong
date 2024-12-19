@@ -11,6 +11,16 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/profiles": {
+        target: "http://localhost:8080", // URL del backend Spring Boot
+        changeOrigin: true,
+        secure: false,
+      },
+      "/song": {
+        target: "http://localhost:8080", // URL del backend Spring Boot
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 });

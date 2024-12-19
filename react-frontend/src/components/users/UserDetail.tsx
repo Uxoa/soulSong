@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Music } from "lucide-react";
 
 import { getUserById } from "../../api-services/users.services";
 import { User } from "../../types";
 
 const UserDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-
   const [user, setUser] = useState<User | null>(null);
 
-  // Obtener los detalles del usuario
   const fetchData = async () => {
     try {
-      const data = await getUserById(id || "");
-      setUser(data);
+      if (!id) throw new Error("Invalid user ID");
+      const data = await getUserById(id);
+      setUser(data); // Aseguramos que `data` cumple con el tipo `User`.
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
@@ -35,11 +34,8 @@ const UserDetail: React.FC = () => {
   return (
       <div className="flex-1 p-8">
         <div className="max-w-4xl mx-auto">
-          {/* User Information Card */}
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">
-              {user.firstName} {user.lastName}
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">{user.name}</h1>
 
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-gray-600">
@@ -48,8 +44,12 @@ const UserDetail: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-3 text-gray-600">
-                <Phone className="h-5 w-5" />
-                <span>{user.phoneNumber}</span>
+                <Music className="h-5 w-5" />
+                <span>
+                {user.favoriteSongs.length > 0
+                    ? user.favoriteSongs.join(", ")
+                    : "No favorite songs"}
+              </span>
               </div>
             </div>
           </div>

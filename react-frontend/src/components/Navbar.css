@@ -1,0 +1,90 @@
+/* Barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(145deg, #1b1b2f, #23253a);
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #00e6e6;
+    text-transform: uppercase;
+}
+
+/* Links de navegación */
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-links .link {
+    display: block;
+    font-size: 1rem;
+    color: #c9c9d3;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar-links .link:hover {
+    background: #2f2f4f;
+    color: #00e6e6;
+}
+
+.navbar-links .active {
+    background: #00e6e6;
+    color: #1b1b2f;
+    font-weight: 600;
+}
+
+/* Menú hamburguesa */
+.burger-menu {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none; /* Ocultamos los links en pantallas pequeñas */
+        flex-direction: column;
+        background: linear-gradient(145deg, #1b1b2f, #23253a);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar-links.open {
+        display: flex; /* Mostramos los links cuando el menú está abierto */
+    }
+
+    .navbar-links ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .burger-menu {
+        display: block; /* Mostramos el botón de hamburguesa */
+    }
+}
