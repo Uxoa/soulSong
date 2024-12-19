@@ -1,45 +1,48 @@
 package io.soulsong.controllers;
 
-import io.soulsong.entities.Profile;
+import io.soulsong.dtos.ImageProfileDTO;
+import io.soulsong.services.ImageProfileService;
 import io.soulsong.services.ProfileService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
     
     private final ProfileService profileService;
+    private final ImageProfileService imageProfileService;
     
-    public ProfileController(ProfileService profileService) {
+    public ProfileController(ProfileService profileService, ImageProfileService imageProfileService) {
         this.profileService = profileService;
-    }
-    
-    @GetMapping
-    public List<Profile> getAllProfiles() {
-        return profileService.getAllProfiles();
+        this.imageProfileService = imageProfileService;
     }
     
     @GetMapping("/{id}")
-    public Profile getProfileById(@PathVariable Long id) {
-        return profileService.getProfileById(id);
+    public ResponseEntity<Object> getProfile(@PathVariable Long id) {
+        return profileService.getProfile(id)
+              .map(ResponseEntity::ok)
+              .orElse(ResponseEntity.notFound().build());
     }
     
-    @PostMapping("/{userId}")
-    public Profile createProfile(@RequestBody Profile profile, @PathVariable Long userId) {
-        return profileService.createProfile(profile, userId);
+    @PostMapping("/{id}/image")
+    public ResponseEntity<ImageProfileDTO> uploadImage(@PathVariable Long id, @Valid @RequestBody ImageProfileDTO imageProfileDTO) {
+        ImageProfileDTO savedImage = imageProfileService.uploadImage(id, imageProfileDTO);
+        return ResponseEntity.ok(savedImage);
     }
     
-    @PutMapping("/{id}")
-    public Profile updateProfile(@RequestBody Profile profile, @PathVariable Long id) {
-        return profileService.updateProfile(profile, id);
+    @GetMapping("/{id}/image")
+    public ResponseEntity<Object> getImage(@PathVariable Long id) {
+        return imageProfileService.getImage(id)
+              .map(ResponseEntity::ok)
+              .orElse(ResponseEntity.notFound().build());
     }
     
-    @DeleteMapping("/{id}")
-    public void deleteProfile(@PathVariable Long id) {
-        profileService.deleteProfile(id);
+    @DeleteMapping("/{id}/image")
+    public ResponseEntity<Void> deleteImage(@PathVariable Long id) {
+        imageProfileService.deleteImage(id);
+        return ResponseEntity.noContent().build();
     }
-    
-    
 }

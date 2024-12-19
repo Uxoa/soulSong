@@ -7,6 +7,7 @@ import io.soulsong.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfileService {
@@ -59,4 +60,12 @@ public class ProfileService {
     public void deleteProfileByUserId(Long userId) {
         profileRepository.deleteByUserId(userId);
     }
+    
+    public Optional<Object> getProfile(Long id) {
+        return Optional.of(profileRepository.findById(id));
+        
+    }
+    
+    
+    
 }

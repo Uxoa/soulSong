@@ -245,6 +245,53 @@
           }
         }
       ]
+    },
+    {
+      "name": "ImageProfile",
+      "item": [
+        {
+          "name": "Upload Image",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "http://localhost:8080/image-profiles",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image-profiles"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"mimeType\": \"image/png\", \"imageData\": \"<base64-encoded-data>\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Image by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/image-profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image-profiles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Image",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/image-profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image-profiles", "1"]
+            }
+          }
+        }
+      ]
     }
   ]
 }
+
