@@ -1,27 +1,27 @@
 package io.soulsong.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "song_essence") // Nombre de la tabla en la base de datos
 public class SongEssence {
     
     @Id
-    private String trackId; // ID único de la canción
+    private String trackId;
     
+    @Column(nullable = false)
     private String songName;
+    
     private float danceability;
     private float energy;
     private float tempo;
     private float valence;
     
-    // Constructor vacío requerido por JPA
-    public SongEssence() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "profile_id", nullable = false)
+    private Profile profile;
     
-    // Constructor con parámetros
+    public SongEssence() {}
+    
     public SongEssence(String trackId, String songName, float danceability, float energy, float tempo, float valence) {
         this.trackId = trackId;
         this.songName = songName;
@@ -31,7 +31,6 @@ public class SongEssence {
         this.valence = valence;
     }
     
-    // Getters y setters
     public String getTrackId() {
         return trackId;
     }
@@ -78,5 +77,13 @@ public class SongEssence {
     
     public void setValence(float valence) {
         this.valence = valence;
+    }
+    
+    public Profile getProfile() {
+        return profile;
+    }
+    
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

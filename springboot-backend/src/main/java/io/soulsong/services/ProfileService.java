@@ -1,71 +1,62 @@
 package io.soulsong.services;
 
+import io.soulsong.dtos.ProfileDTO;
 import io.soulsong.entities.Profile;
 import io.soulsong.entities.User;
 import io.soulsong.repositories.ProfileRepository;
 import io.soulsong.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProfileService {
-
+    
     private final ProfileRepository profileRepository;
     private final UserRepository userRepository;
-
+    
     public ProfileService(ProfileRepository profileRepository, UserRepository userRepository) {
         this.profileRepository = profileRepository;
         this.userRepository = userRepository;
     }
-
-    public List<Profile> getAllProfiles() {
-        return profileRepository.findAll();
+    
+    public Optional<ProfileDTO> getProfile(Long id) {
+        return profileRepository.findById(id).map(ProfileDTO::fromEntity);
     }
-
-    public Profile getProfileById(Long id) {
-        return profileRepository.findById(id)
-              .orElseThrow(() -> new RuntimeException("Profile not found"));
-    }
-
-    public Profile createProfile(Profile profile, Long userId) {
-        User user = userRepository.findById(userId)
+    
+    public ProfileDTO createProfile(ProfileDTO profileDTO) {
+        User user = userRepository.findById(profileDTO.getUserId())
               .orElseThrow(() -> new RuntimeException("User not found"));
+        Profile profile = new Profile();
         profile.setUser(user);
-        return profileRepository.save(profile);
+        profile.setName(profileDTO.getName());
+        profile.setEmail(profileDTO.getEmail());
+        Profile savedProfile = profileRepository.save(profile);
+        return ProfileDTO.fromEntity(savedProfile);
     }
-
-    public Profile updateProfile(Profile profile, Long id) {
-        Profile profileToUpdate = profileRepository.findById(id)
-              .orElseThrow(() -> new RuntimeException("Profile not found"));
-        profileToUpdate.setFavoriteSongs(profile.getFavoriteSongs());
-        return profileRepository.save(profileToUpdate);
-    }
-
+    
     public void deleteProfile(Long id) {
         profileRepository.deleteById(id);
     }
-
-    public List<Profile> getProfilesByUserId(Long userId) {
-        return profileRepository.findByUserId(userId);
+    
+    public ProfileDTO updateProfile(Long id, ProfileDTO profileDTO) {
+        Profile profile = profileRepository.findById(id)
+              .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
+        profile.setName(profileDTO.getName());
+        profile.setEmail(profileDTO.getEmail());
+        Profile updatedProfile = profileRepository.save(profile);
+        return ProfileDTO.fromEntity(updatedProfile);
     }
-
-    public Profile getProfileByUserId(Long userId) {
-        return profileRepository.findByUserId(userId).stream()
-              .findFirst()
+    
+    public boolean isUserRegistered(Long userId) {
+        return userRepository.existsById(userId);
+    }
+    
+    public void emptyDataProfile(Long id) {
+        Profile profile = profileRepository.findById(id)
               .orElseThrow(() -> new RuntimeException("Profile not found"));
+        profile.getFavoriteSongs().clear();
+        profileRepository.save(profile);
     }
-
-    public void deleteProfileByUserId(Long userId) {
-        profileRepository.deleteByUserId(userId);
-    }
-    
-    public Optional<Object> getProfile(Long id) {
-        return Optional.of(profileRepository.findById(id));
-        
-    }
-    
-    
-    
 }

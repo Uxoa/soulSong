@@ -1,38 +1,28 @@
 package io.soulsong.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "app_user") // Evitar conflicto con palabras reservadas como "user"
 public class User {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generar ID automáticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String firstName;
-    private String lastName;
-    private LocalDate birthday;
+    @Column(nullable = false, unique = true)
+    private String username;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    @Column(nullable = false, unique = true)
     private String email;
-    private String phoneNumber;
     
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // Relación con Profile
-    @JoinColumn(name = "profile_id", unique = true) // Garantizar unicidad
-    @JsonIgnoreProperties("user") // Evitar referencia circular
-    private Profile profile = new Profile();
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Profile profile;
     
-    public User() {
-        this.profile = new Profile(); // Inicializar perfil automáticamente
-        this.profile.setUser(this); // Vincular perfil al usuario
-    }
+    public User() {}
     
-    public User(String paloma, String garcía, LocalDate of, String mail, String s) {
-    }
-    
-    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -41,28 +31,20 @@ public class User {
         this.id = id;
     }
     
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
     
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String username) {
+        this.username = username;
     }
     
-    public String getLastName() {
-        return lastName;
+    public String getPassword() {
+        return password;
     }
     
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-    
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     public String getEmail() {
@@ -73,14 +55,6 @@ public class User {
         this.email = email;
     }
     
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-    
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-    
     public Profile getProfile() {
         return profile;
     }
@@ -88,9 +62,7 @@ public class User {
     public void setProfile(Profile profile) {
         this.profile = profile;
         if (profile != null) {
-            profile.setUser(this); // Configurar la relación inversa
+            profile.setUser(this);
         }
     }
-    
-    
 }

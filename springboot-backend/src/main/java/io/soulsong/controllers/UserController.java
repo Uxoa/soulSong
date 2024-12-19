@@ -1,11 +1,11 @@
 package io.soulsong.controllers;
 
 import io.soulsong.dtos.UserDTO;
-import io.soulsong.entities.User;
 import io.soulsong.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,14 +17,18 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
+        UserDTO savedUser = userService.createUser(userDTO);
+        return ResponseEntity.ok(savedUser);
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+        return userService.getUserById(id)
+              .map(ResponseEntity::ok)
+              .orElse(ResponseEntity.notFound().build());
     }
     
     @GetMapping
@@ -33,13 +37,14 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO) {
+        UserDTO updatedUser = userService.updateUser(id, userDTO);
+        return ResponseEntity.ok(updatedUser);
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable Long id) {
-        return userService.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
-    
 }
