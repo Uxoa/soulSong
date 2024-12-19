@@ -20,4 +20,26 @@ public class ProfileController {
     public List<Profile> getAllProfiles() {
         return profileService.getAllProfiles();
     }
+    
+    @GetMapping("/{id}")
+    public Profile getProfileById(@PathVariable Long id) {
+        return profileService.getProfileById(id);
+    }
+    
+    @PostMapping("/{userId}")
+    public Profile createProfile(@RequestBody Profile profile, @PathVariable Long userId) {
+        return profileService.createProfile(profile, userId);
+    }
+    
+    @PutMapping("/{id}")
+    public Profile updateProfile(@RequestBody Profile profile, @PathVariable Long id) {
+        return profileService.updateProfile(profile, id);
+    }
+    
+    @DeleteMapping("/{id}")
+    public void deleteProfile(@PathVariable Long id) {
+        profileService.deleteProfile(id);
+    }
+    
+    
 }

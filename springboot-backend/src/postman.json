@@ -99,6 +99,37 @@
           }
         },
         {
+          "name": "Get Profile by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/profiles",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"favoriteSongs\": [{\"trackId\": \"11dFghVXANMlKmJXsNCbNl\", \"name\": \"Happy\"}]}"
+            }
+          }
+        },
+        {
           "name": "Update Profile",
           "request": {
             "method": "PUT",
@@ -114,6 +145,102 @@
             "body": {
               "mode": "raw",
               "raw": "{\"favoriteSongs\": [{\"id\": \"11dFghVXANMlKmJXsNCbNl\", \"name\": \"Happy\"}]}"
+            }
+          }
+        },
+        {
+          "name": "Delete Profile",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SongEssence",
+      "item": [
+        {
+          "name": "Get All Songs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/songessence",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence"]
+            }
+          }
+        },
+        {
+          "name": "Get Song by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/songessence/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Song",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/songessence",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"trackId\": \"31dFghVXANMlKmJXsNCbTf\", \"songName\": \"Energetic\", \"danceability\": 0.9, \"energy\": 0.8, \"tempo\": 140.0, \"valence\": 0.05}"
+            }
+          }
+        },
+        {
+          "name": "Delete Song",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/songessence/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile Analysis",
+      "item": [
+        {
+          "name": "Generate Profile Rating",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/profiles/1/analyze",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1", "analyze"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"selectedSongs\": [\"11dFghVXANMlKmJXsNCbNl\", \"31dFghVXANMlKmJXsNCbTf\"]}"
             }
           }
         }

@@ -1,5 +1,7 @@
 package io.soulsong.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -19,6 +21,7 @@ public class User {
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // Relación con Profile
     @JoinColumn(name = "profile_id", unique = true) // Garantizar unicidad
+    @JsonIgnoreProperties("user") // Evitar referencia circular
     private Profile profile = new Profile();
     
     public User() {

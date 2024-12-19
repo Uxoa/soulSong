@@ -1,5 +1,6 @@
 package io.soulsong.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ public class Profile {
     private User user;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("profile")
     private List<SongEssence> favoriteSongs = new ArrayList<>();
     
     public Profile() {}
@@ -51,5 +53,10 @@ public class Profile {
     
     public void setSongEssence(SongEssence song1) {
         favoriteSongs.add(song1);
+    }
+    
+    
+    public void setFavoriteSongs(List<SongEssence> favoriteSongs) {
+        this.favoriteSongs = favoriteSongs;
     }
 }
