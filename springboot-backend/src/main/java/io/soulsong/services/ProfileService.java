@@ -1,24 +1,30 @@
 package io.soulsong.services;
 
 import io.soulsong.entities.Profile;
-import io.soulsong.entities.SongEssence;
 import io.soulsong.entities.User;
-import io.soulsong.requests.SpotifyRequest;
+import io.soulsong.repositories.ProfileRepository;
+import io.soulsong.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProfileService {
     
-    private final SpotifyRequest spotifyRequest;
+    private final ProfileRepository profileRepository;
+    private final UserRepository userRepository;
     
-    public ProfileService(SpotifyRequest spotifyRequest) {
-        this.spotifyRequest = spotifyRequest;
+    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository) {
+        this.profileRepository = profileRepository;
+        this.userRepository = userRepository;
     }
     
-    public void addSongToProfile(User user, String trackId) {
-        Profile profile = user.getProfile();
-        SongEssence songEssence = spotifyRequest.getSongEssence(trackId);
-        
-        profile.addFavoriteSong(songEssence);
+    public List<Profile> getAllProfiles() {
+        return profileRepository.findAll();
+    }
+    
+    public Profile getProfileById(Long id) {
+        return profileRepository.findById(id)
+              .orElseThrow(() -> new RuntimeException("Profile not found"));
     }
 }

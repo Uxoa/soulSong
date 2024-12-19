@@ -1,7 +1,9 @@
 package io.soulsong.config;
 
-import io.soulsong.entities.User;
+import io.soulsong.entities.Profile;
 import io.soulsong.entities.SongEssence;
+import io.soulsong.repositories.ProfileRepository;
+import io.soulsong.repositories.SongEssenceRepository;
 import io.soulsong.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -12,35 +14,34 @@ import java.util.List;
 
 @Configuration
 public class InitFakeData {
-    
+
     @Bean
-    public CommandLineRunner initData(UserRepository userRepository) {
+    public CommandLineRunner initData(
+          UserRepository userRepository,
+          ProfileRepository profileRepository,
+          SongEssenceRepository songEssenceRepository) {
         return args -> {
-            // Crear usuarios de prueba
-            List<User> userList = List.of(
-                  new User("Paloma", "García", LocalDate.of(1971, 4, 3), "paloma@example.com", "+34 600 123 456"),
-                  new User("Antonio", "Martínez", LocalDate.of(1980, 2, 15), "antonio@example.com", "+34 600 987 654"),
-                  new User("María", "Lopez", LocalDate.of(1990, 6, 10), "maria@example.com", "+34 622 111 333"),
-                  new User("Sofía", "Ruiz", LocalDate.of(1995, 12, 20), "sofia@example.com", "+34 644 333 555")
-            );
-            
-            // Crear SongEssence de prueba
-            SongEssence song1 = new SongEssence("11dFghVXANMlKmJXsNCbNl", "Happy", 0.8, 0.7, 120.0, 0.1);
-            SongEssence song2 = new SongEssence("113rghVXANMlKmJXsNCblp", "Melancholy", 0.6, 0.5,
-                  100.0, 0.3);
-            SongEssence song3 = new SongEssence("31dFghVXANMlKmJXsNCbTf", "Energetic", 0.9, 0.8,
-                  140.0, 0.05);
-            
-            // Agregar canciones favoritas a los perfiles
-            userList.get(0).getProfile().addFavoriteSong(song1);
-            userList.get(0).getProfile().addFavoriteSong(song2);
-            
-            userList.get(1).getProfile().addFavoriteSong(song3);
-            
-            // Guardar los usuarios en la base de datos
-            userRepository.saveAll(userList);
-            
-            System.out.println("Usuarios de prueba guardados correctamente.");
+            // Crear canciones
+            SongEssence song1 = new SongEssence("11dFghVXANMlKmJXsNCbNl", "Happy", 0.8f, 0.7f, 120.0f, 0.1f);
+            SongEssence song2 = new SongEssence("113rghVXANMlKmJXsNCblp", "Melancholy", 0.6f, 0.5f, 100.0f, 0.3f);
+            SongEssence song3 = new SongEssence("31dFghVXANMlKmJXsNCbTf", "Energetic", 0.9f, 0.8f, 140.0f, 0.05f);
+
+            // Guardar canciones si no existen
+            List<SongEssence> songs = List.of(song1, song2, song3);
+            songs.forEach(song -> {
+                if (!songEssenceRepository.existsById(song.getTrackId())) {
+                    songEssenceRepository.save(song);
+                    System.out.println("Saved song: " + song.getSongName());
+                } else {
+                    System.out.println("Song already exists: " + song.getSongName());
+                }
+            });
+
+            // Crear perfiles
+            Profile profile1 = new Profile("John", "Doe", LocalDate.of(1990, 1, 1), "john.doe@example.com");
+            profile1.setSongEssence(song1);
+            Profile profile2 = new Profile("Jane", "Doe", LocalDate.of(1995, 2, 2), "jane.doe@example.com");
+            profile2.setSongEssence(song2);
         };
     }
 }

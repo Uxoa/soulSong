@@ -99,6 +99,11 @@
             <version>5.10.0</version> <!-- Ajusta la versión si es necesario -->
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

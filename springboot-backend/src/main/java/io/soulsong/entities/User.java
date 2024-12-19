@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "users")
+@Table(name = "app_user") // Evitar conflicto con palabras reservadas como "user"
 public class User {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generar ID automáticamente
     private Long id;
     
     private String firstName;
@@ -16,25 +17,25 @@ public class User {
     private String email;
     private String phoneNumber;
     
-    @Embedded
-    private Profile profile;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true) // Relación con Profile
+    @JoinColumn(name = "profile_id", unique = true) // Garantizar unicidad
+    private Profile profile = new Profile();
     
     public User() {
-        this.profile = new Profile();
+        this.profile = new Profile(); // Inicializar perfil automáticamente
+        this.profile.setUser(this); // Vincular perfil al usuario
     }
     
-    public User(String firstName, String lastName, LocalDate birthday, String email, String phoneNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.profile = new Profile();
+    public User(String paloma, String garcía, LocalDate of, String mail, String s) {
     }
     
     // Getters y Setters
     public Long getId() {
         return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
     }
     
     public String getFirstName() {
@@ -83,5 +84,10 @@ public class User {
     
     public void setProfile(Profile profile) {
         this.profile = profile;
+        if (profile != null) {
+            profile.setUser(this); // Configurar la relación inversa
+        }
     }
+    
+    
 }

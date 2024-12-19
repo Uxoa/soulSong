@@ -1,7 +1,7 @@
 package io.soulsong.controllers;
 
 import io.soulsong.dtos.UserDTO;
-import io.soulsong.requests.UserRequest;
+import io.soulsong.entities.User;
 import io.soulsong.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,48 +14,32 @@ public class UserController {
     
     private final UserService userService;
     
-    // Constructor para inyección de dependencias
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    
-    // Crear un usuario
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserRequest userRequest) {
-        return userService.createUser(userRequest);
+    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
     
-    // Obtener todos los usuarios
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> userList = userService.getAllUsers();
-        return ResponseEntity.ok(userList);
-    }
-    
-    // Obtener un usuario por ID
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
     
-    // Actualizar un usuario
+    @GetMapping
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers();
+    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserRequest userRequest) {
-        return userService.updateUser(id, userRequest);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
     }
     
-    // Eliminar un usuario
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUserById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable Long id) {
+        return userService.deleteUser(id);
     }
     
-    
-    // Buscar usuarios con gustos musicales afines
-    @GetMapping("/{userId}/similar")
-    public ResponseEntity<List<UserDTO>> getSimilarUsers(@PathVariable Long userId) {
-        List<UserDTO> similarUsers = userService.findSimilarUsers(userId);
-        return ResponseEntity.ok(similarUsers);
-    }
 }

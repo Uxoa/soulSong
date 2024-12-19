@@ -1,47 +1,37 @@
-// SongEssence.java
 package io.soulsong.entities;
 
-import jakarta.persistence.*;
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "song_essences")
+@Table(name = "song_essence") // Nombre de la tabla en la base de datos
 public class SongEssence {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String trackId; // ID único de la canción
     
-    private String trackId;
-    private String mood;
-    private double energy;
-    private double danceability;
-    private double tempo;
-    private double acousticness;
+    private String songName;
+    private float danceability;
+    private float energy;
+    private float tempo;
+    private float valence;
     
-    // Constructor vacío para JPA
-    public SongEssence() {}
+    // Constructor vacío requerido por JPA
+    public SongEssence() {
+    }
     
-    // Constructor completo
-    public SongEssence(String trackId, String mood, double energy, double danceability,
-                       double tempo, double acousticness) {
+    // Constructor con parámetros
+    public SongEssence(String trackId, String songName, float danceability, float energy, float tempo, float valence) {
         this.trackId = trackId;
-        this.mood = mood;
-        this.energy = energy;
+        this.songName = songName;
         this.danceability = danceability;
+        this.energy = energy;
         this.tempo = tempo;
-        this.acousticness = acousticness;
+        this.valence = valence;
     }
     
-    // Getters y Setters
-    public Long getId() {
-        return id;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
+    // Getters y setters
     public String getTrackId() {
         return trackId;
     }
@@ -50,56 +40,43 @@ public class SongEssence {
         this.trackId = trackId;
     }
     
-    public String getMood() {
-        return mood;
+    public String getSongName() {
+        return songName;
     }
     
-    public void setMood(String mood) {
-        this.mood = mood;
+    public void setSongName(String songName) {
+        this.songName = songName;
     }
     
-    public double getEnergy() {
-        return energy;
-    }
-    
-    public void setEnergy(double energy) {
-        this.energy = energy;
-    }
-    
-    public double getDanceability() {
+    public float getDanceability() {
         return danceability;
     }
     
-    public void setDanceability(double danceability) {
+    public void setDanceability(float danceability) {
         this.danceability = danceability;
     }
     
-    public double getTempo() {
+    public float getEnergy() {
+        return energy;
+    }
+    
+    public void setEnergy(float energy) {
+        this.energy = energy;
+    }
+    
+    public float getTempo() {
         return tempo;
     }
     
-    public void setTempo(double tempo) {
+    public void setTempo(float tempo) {
         this.tempo = tempo;
     }
     
-    public double getAcousticness() {
-        return acousticness;
+    public float getValence() {
+        return valence;
     }
     
-    public void setAcousticness(double acousticness) {
-        this.acousticness = acousticness;
-    }
-    
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SongEssence that = (SongEssence) o;
-        return Objects.equals(trackId, that.trackId);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(trackId);
+    public void setValence(float valence) {
+        this.valence = valence;
     }
 }

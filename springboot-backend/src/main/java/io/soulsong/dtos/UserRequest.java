@@ -1,4 +1,4 @@
-package io.soulsong.requests;
+package io.soulsong.dtos;
 
 import java.time.LocalDate;
 

@@ -1,27 +1,29 @@
 package io.soulsong.controllers;
 
+
 import io.soulsong.entities.SongEssence;
-import io.soulsong.services.SongEssenceService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import io.soulsong.services.SpotifyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/songs")
+@RequestMapping("/songs")
 public class SongEssenceController {
     
-    private final SongEssenceService songEssenceService;
+    private final SpotifyService spotifyService;
     
-    public SongEssenceController(SongEssenceService songEssenceService) {
-        this.songEssenceService = songEssenceService;
+    @Autowired
+    public SongEssenceController(SpotifyService spotifyService) {
+        this.spotifyService = spotifyService;
     }
     
-    @GetMapping("/essence")
-    public ResponseEntity<SongEssence> getSongEssence(@RequestParam String trackId) {
-        SongEssence essence = songEssenceService.getSongEssence(trackId);
-        return ResponseEntity.ok(essence);
+    @GetMapping("/analyze/{trackId}")
+    public SongEssence analyzeTrack(@PathVariable String trackId) {
+        return spotifyService.getAudioFeatures(trackId);
+    }
+    
+    @GetMapping("/search")
+    public Object searchTracks(@RequestParam String query) {
+        return spotifyService.searchTracks(query);
     }
 }
-
