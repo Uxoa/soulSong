@@ -1,7 +1,10 @@
 package io.soulsong.controllers;
 
 import io.soulsong.dtos.UserDTO;
+import io.soulsong.entities.Profile;
+import io.soulsong.entities.User;
 import io.soulsong.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +22,28 @@ public class UserController {
     }
     
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
-        UserDTO savedUser = userService.createUser(userDTO);
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<UserDTO> createUserWithEmptyProfile(@RequestBody UserDTO userDTO) {
+        // Crear usuario
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        
+        // Crear perfil vacío
+        Profile profile = new Profile();
+        profile.setName(userDTO.getUsername() + "'s Profile"); // Ejemplo de nombre
+        profile.setEmail(user.getEmail());
+        profile.setUser(user);
+        
+        // Asociar perfil al usuario
+        user.setProfile(profile);
+        
+        // Guardar usuario (y automáticamente el perfil por cascade)
+        user = userService.createUser(UserDTO.fromEntity(user)).toEntity();
+        
+        // Devolver respuesta
+        UserDTO responseDTO = new UserDTO(user.getId(), user.getUsername(), user.getEmail());
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
     
     @GetMapping("/{id}")

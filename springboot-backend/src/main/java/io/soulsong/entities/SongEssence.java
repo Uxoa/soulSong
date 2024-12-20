@@ -2,14 +2,21 @@ package io.soulsong.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class SongEssence {
     
     @Id
-    private String trackId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambiar a IDENTITY o AUTO
+    private Long id;
     
-    @Column(nullable = false)
+    @Column
     private String songName;
+    
+    @ManyToMany(mappedBy = "favoriteSongs") // Cambiar 'favorite_songs' a 'favoriteSongs'
+    private List<Profile> profiles = new ArrayList<>();
     
     private float danceability;
     private float energy;
@@ -17,12 +24,15 @@ public class SongEssence {
     private float valence;
     
     @ManyToOne
-    @JoinColumn(name = "profile_id", nullable = false)
+    @JoinColumn(name = "profile_id")
     private Profile profile;
+    
+    private Long trackId;
     
     public SongEssence() {}
     
-    public SongEssence(String trackId, String songName, float danceability, float energy, float tempo, float valence) {
+    public SongEssence(Long trackId, String songName, float danceability, float energy, float tempo,
+                       float valence) {
         this.trackId = trackId;
         this.songName = songName;
         this.danceability = danceability;
@@ -31,13 +41,9 @@ public class SongEssence {
         this.valence = valence;
     }
     
-    public String getTrackId() {
-        return trackId;
+    public SongEssence(String trackId, String name, float danceability, float energy, float tempo, float valence) {
     }
     
-    public void setTrackId(String trackId) {
-        this.trackId = trackId;
-    }
     
     public String getSongName() {
         return songName;
@@ -85,5 +91,13 @@ public class SongEssence {
     
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+    
+    public void setTrackId(Long trackId) {
+        this.trackId = trackId;
+    }
+    
+    public Long getTrackId() {
+        return trackId;
     }
 }

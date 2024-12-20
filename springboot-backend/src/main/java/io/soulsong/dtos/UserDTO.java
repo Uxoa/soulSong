@@ -7,8 +7,16 @@ public class UserDTO {
     private Long id;
     private String username;
     private String email;
+    private String password;
+    
     
     public UserDTO() {}
+    
+    public UserDTO(Long id, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
     
     public Long getId() {
         return id;
@@ -47,6 +55,15 @@ public class UserDTO {
         user.setId(this.id);
         user.setUsername(this.username);
         user.setEmail(this.email);
+        
         return user;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

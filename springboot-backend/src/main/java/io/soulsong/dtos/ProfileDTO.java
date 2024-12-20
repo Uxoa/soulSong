@@ -1,9 +1,6 @@
 package io.soulsong.dtos;
 
 import io.soulsong.entities.Profile;
-import io.soulsong.entities.SongEssence;
-
-import java.util.List;
 
 public class ProfileDTO {
     
@@ -11,7 +8,7 @@ public class ProfileDTO {
     private Long userId;
     private String name;
     private String email;
-    private List<String> favoriteSongIds;
+    
     
     public ProfileDTO() {}
     
@@ -39,31 +36,22 @@ public class ProfileDTO {
         this.name = name;
     }
     
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    public List<String> getFavoriteSongIds() {
-        return favoriteSongIds;
-    }
-    
-    public void setFavoriteSongIds(List<String> favoriteSongIds) {
-        this.favoriteSongIds = favoriteSongIds;
-    }
-    
     public static ProfileDTO fromEntity(Profile profile) {
         ProfileDTO dto = new ProfileDTO();
         dto.setId(profile.getId());
         dto.setUserId(profile.getUser().getId());
         dto.setName(profile.getName());
-        dto.setEmail(profile.getEmail());
-        dto.setFavoriteSongIds(
-              profile.getFavoriteSongs().stream().map(SongEssence::getTrackId).toList()
-        );
         return dto;
+    }
+    
+    public Profile toEntity() {
+        Profile profile = new Profile();
+        profile.setId(this.id);
+        profile.setName(this.name);
+        return profile;
+    }
+    
+    public String getEmail() {
+        return email;
     }
 }

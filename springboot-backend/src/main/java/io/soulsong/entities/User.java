@@ -1,25 +1,34 @@
 package io.soulsong.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
+@Table(name = "users")
 public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String username;
     
-    @Column(nullable = false)
+    @Column
     private String password;
     
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String email;
     
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("user")
     private Profile profile;
+    
+    @ManyToMany(mappedBy = "users")
+    private Set<Role> roles = new HashSet<>();
     
     public User() {}
     
@@ -65,4 +74,18 @@ public class User {
             profile.setUser(this);
         }
     }
+    
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", email='" + email + '\'' +
+            ", profile=" + profile +
+            '}';
+    }
+    
+    
+    
 }

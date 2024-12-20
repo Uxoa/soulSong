@@ -11,10 +11,15 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String name;
     
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany
+    @JoinTable(
+          name = "user_roles",
+          joinColumns = @JoinColumn(name = "role_id"),
+          inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private Set<User> users = new HashSet<>();
     
     public Role() {}

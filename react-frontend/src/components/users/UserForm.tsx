@@ -7,9 +7,16 @@ interface UserFormProps {
     onCancel: () => void;
 }
 
+const defaultUser: UserDTO = {
+    name: '',
+    email: '',
+    role: '', // Provide a default value for role
+    favoriteSongs: [] // Provide a default value for favoriteSongs
+};
+
 const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
     const [formData, setFormData] = useState<UserDTO>(
-        user || { name: '', email: '' }
+        user || defaultUser
     );
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +35,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
                 <input
                     type="text"
                     name="name"
-                    value={formData.name}
+                    value={formData.name || ''}
                     onChange={handleChange}
                     required
                 />
@@ -38,7 +45,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.email || ''}
                     onChange={handleChange}
                     required
                 />

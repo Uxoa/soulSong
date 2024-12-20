@@ -1,5 +1,6 @@
 import axiosInstance from './axios-instance';
 import { ProfileDTO } from "../types";
+
 /**
  * Obtener todos los perfiles.
  * @returns Lista de perfiles.
@@ -7,7 +8,7 @@ import { ProfileDTO } from "../types";
 export const getProfiles = async (): Promise<ProfileDTO[]> => {
   const response = await axiosInstance.get("/profiles");
   return response.data;
-};
+}
 
 /**
  * Crear un nuevo perfil.
@@ -31,7 +32,7 @@ export const updateProfile = async (
     id: number,
     profile: Omit<ProfileDTO, 'id'>
 ): Promise<ProfileDTO> => {
-  const response = await axiosInstance.put(`/api/profiles/${id}`, profile);
+  const response = await axiosInstance.put(`/profiles/${id}`, profile);
   return response.data;
 };
 

@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
-import { getUsers, createUser, updateUser, deleteUser, UserDTO } from '../../api-services/users.services';
-import UserForm from './UserForm';
-import './UserManager.css';
+import { useState, useEffect } from "react";
+import {
+    getUsers,
+    createUser,
+    updateUser,
+    deleteUser,
+    UserDTO,
+} from "../../api-services/users.services";
+import UserForm from "./UserForm";
+import "./UserManager.css";
 
 const UserManager = () => {
     const [users, setUsers] = useState<UserDTO[]>([]);
@@ -13,8 +19,8 @@ const UserManager = () => {
     }, []);
 
     const loadUsers = async () => {
-        const data = await getUsers();
-        setUsers(data);
+        const userList = await getUsers();
+        setUsers(userList);
     };
 
     const handleCreate = () => {
@@ -27,52 +33,51 @@ const UserManager = () => {
         setShowForm(true);
     };
 
-    const handleDelete = async (id: number) => {
-        await deleteUser(id);
-        loadUsers();
-    };
-
-    const handleSave = async (user: UserDTO) => {
-        if (selectedUser?.id) {
-            await updateUser(selectedUser.id, user);
-        } else {
-            await createUser(user);
-        }
-        setShowForm(false);
+    const handleDelete = async (userId: number) => {
+        await deleteUser(userId);
         loadUsers();
     };
 
     return (
         <div className="user-manager">
-            <h1>Gestión de Usuarios</h1>
-            <button className="button create-button" onClick={handleCreate}>
-                Crear Usuario
-            </button>
-            <div className="user-grid">
-                {users.map((user) => (
-                    <div className="user-card" key={user.id}>
-                        <h3>{user.name}</h3>
-                        <p>{user.email}</p>
-                        <div className="user-card-buttons">
-                            <button className="button edit-button" onClick={() => handleEdit(user)}>
-                                Editar
-                            </button>
-                            <button className="button delete-button" onClick={() => handleDelete(user.id!)}>
-                                Eliminar
-                            </button>
+            <header className="user-manager-header">
+                <h1>Manage Users</h1>
+                <button className="create-button" onClick={handleCreate}>
+                    + Create User
+                </button>
+            </header>
+            {showForm ? (
+                <UserForm
+                    user={selectedUser}
+                    onClose={() => setShowForm(false)}
+                    onSave={() => {
+                        setShowForm(false);
+                        loadUsers();
+                    }}
+                />
+            ) : (
+                <div className="user-grid">
+                    {users.map((user) => (
+                        <div className="user-card" key={user.id}>
+                            <h3>{user.name}</h3>
+                            <p>Email: {user.email}</p>
+                            <p>Role: {user.role}</p>
+                            <div className="card-actions">
+                                <button
+                                    className="edit-button"
+                                    onClick={() => handleEdit(user)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handleDelete(user.id)}
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-            {showForm && (
-                <div className="form-overlay">
-                    <div className="form-container">
-                        <UserForm
-                            user={selectedUser}
-                            onSave={handleSave}
-                            onCancel={() => setShowForm(false)}
-                        />
-                    </div>
+                    ))}
                 </div>
             )}
         </div>

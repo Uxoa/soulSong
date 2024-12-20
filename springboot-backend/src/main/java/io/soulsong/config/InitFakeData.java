@@ -10,9 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Configuration
 public class InitFakeData {
     
@@ -21,28 +18,46 @@ public class InitFakeData {
           UserRepository userRepository,
           ProfileRepository profileRepository,
           SongEssenceRepository songEssenceRepository) {
+        
         return args -> {
+            // Crear usuarios
+            User user = new User();
+            user.setUsername("testuser");
+            user.setEmail("testuser@example.com");
+            user.setPassword("securepassword");
+            userRepository.save(user);
+            
             User user1 = new User();
-            user1.setUsername("johndoe");
+            user1.setUsername("john.doe");
             user1.setEmail("john.doe@example.com");
+            user1 = userRepository.save(user1);
             
             User user2 = new User();
-            user2.setUsername("janedoe");
+            user2.setUsername("jane.williams");
             user2.setEmail("jane.doe@example.com");
+            user2 = userRepository.save(user2);
             
-            userRepository.saveAll(List.of(user1, user2));
-            
+            // Crear perfiles
             Profile profile1 = new Profile();
-            profile1.setName("John");
-            profile1.setEmail("john.doe@example.com");
+            profile1.setName("John's Profile");
+            profile1.setEmail(user1.getEmail());
             profile1.setUser(user1);
+            profileRepository.save(profile1);
             
             Profile profile2 = new Profile();
-            profile2.setName("Jane");
-            profile2.setEmail("jane.doe@example.com");
+            profile2.setName("Jane's Profile");
+            profile2.setEmail(user2.getEmail());
             profile2.setUser(user2);
+            profileRepository.save(profile2);
             
-            profileRepository.saveAll(List.of(profile1, profile2));
+            // Crear canciones
+            SongEssence songEssence1 = new SongEssence();
+            songEssence1.setSongName("Song 1");
+            songEssence1.setDanceability(0.5F);
+            songEssence1.setEnergy(0.5F);
+            songEssence1.setValence(0.5F);
+            songEssence1.setTempo(120.0F);
+            songEssenceRepository.save(songEssence1);
         };
     }
 }

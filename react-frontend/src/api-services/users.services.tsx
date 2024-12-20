@@ -3,6 +3,7 @@ import axiosInstance from './axios-instance';
 
 
 export interface UserDTO {
+    role: any;
   id?: number;
   name: string;
   email: string;

@@ -37,7 +37,7 @@ public class SpotifyService {
         }
         
         return new SongEssence(
-              audioFeatures.getId(),
+              trackId,
               audioFeatures.getName(),
               audioFeatures.getDanceability(),
               audioFeatures.getEnergy(),

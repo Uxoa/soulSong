@@ -56,7 +56,7 @@ public class SpotifyDTO {
     }
     
     public static class AudioFeatures {
-        private String id;
+        private Long id;
         private String name;
         private float danceability;
         private float energy;
@@ -64,11 +64,11 @@ public class SpotifyDTO {
         private float valence;
         
         @JsonProperty("id")
-        public String getId() {
+        public Long getId() {
             return id;
         }
         
-        public void setId(String id) {
+        public void setId(Long id) {
             this.id = id;
         }
         
