@@ -1,11 +1,9 @@
-# soulSong - The no gender dating app
+<img width="1174" alt="Captura de pantalla 2024-12-20 a las 12 12 49" src="https://github.com/user-attachments/assets/4c581711-c4ec-4566-90b7-9e564464eeda" /># soulSong - The no gender dating app
 
 App de citas que relaciona a sus usuarios según sus gustos musicales
 y el uso de otras herramientas como la ia
 
-# README: Estado Actual del Proyecto y Próximos Pasos
-
-App de citas que relaciona a sus usuarios según sus gustos musicales y el uso de otras herramientas como la ia
+# Estado Actual del Proyecto y Próximos Pasos
 
 ## SoulSong API
 
@@ -14,6 +12,7 @@ SoulSong es una API desarrollada con Spring Boot que permite gestionar usuarios,
 ## Estado Actual del Proyecto
 
 ### 1. Funcionalidades Completadas
+
 
 #### CRUD Completo:
 
