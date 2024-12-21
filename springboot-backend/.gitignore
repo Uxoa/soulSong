@@ -35,3 +35,5 @@ replay_pid*
 ..react-frontend/.idea/vcs.xml
 ..react-frontend/.idea/misc.xml
 ../react-frontend/.idea/modules.xml
+
+react-frontend/.vite/deps/_metadata.json
