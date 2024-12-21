@@ -9,7 +9,6 @@ public class SongEssenceMapper {
     
     public SongEssence mapToSongEssence(SpotifyDTO.AudioFeatures audioFeatures) {
         SongEssence essence = new SongEssence();
-        essence.setTrackId(audioFeatures.getId());
         essence.setDanceability(audioFeatures.getDanceability());
         essence.setEnergy(audioFeatures.getEnergy());
         essence.setTempo(audioFeatures.getTempo());

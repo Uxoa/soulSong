@@ -1,8 +1,11 @@
 package io.soulsong.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,20 +17,35 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(unique = true)
+    @Column(name = "firstname", unique = true)
+    private String firstname;
+    
+    @Column(name = "lastname", unique = true)
+    private String lastname;
+    
+    @Column(name = "username", unique = true)
     private String username;
     
-    @Column
+    @Column(name = "birthday")
+    private Date birthday;
+    
+    @Column(name = "password", nullable = false)
     private String password;
     
-    @Column(unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
     
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("user")
+    @JsonManagedReference
+    @JsonBackReference
     private Profile profile;
     
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany
+    @JoinTable(
+          name = "user_roles",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private Set<Role> roles = new HashSet<>();
     
     public User() {}
@@ -40,12 +58,37 @@ public class User {
         this.id = id;
     }
     
+    public String getFirstname() {
+        return firstname;
+    }
+    
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    
+    public String getLastname() {
+        return lastname;
+    }
+    
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+    
     public String getUsername() {
         return username;
+    
     }
     
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public Date getBirthday() {
+        return birthday;
+    }
+    
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
     
     public String getPassword() {
@@ -75,17 +118,24 @@ public class User {
         }
     }
     
+    public Set<Role> getRoles() {
+        return roles;
+    }
+    
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+    
     @Override
     public String toString() {
         return "User{" +
-            "id=" + id +
-            ", username='" + username + '\'' +
-            ", password='" + password + '\'' +
-            ", email='" + email + '\'' +
-            ", profile=" + profile +
-            '}';
+              "id=" + id +
+              ", firstname='" + firstname + '\'' +
+              ", lastname='" + lastname + '\'' +
+              ", password='" + password + '\'' +
+              ", email='" + email + '\'' +
+              ", profile=" + (profile != null ? profile.getId() : "Vacio") +
+              ", roles=" + roles +
+              '}';
     }
-    
-    
-    
 }

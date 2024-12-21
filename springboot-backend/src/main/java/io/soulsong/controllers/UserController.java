@@ -22,27 +22,26 @@ public class UserController {
     }
     
     @PostMapping
-    public ResponseEntity<UserDTO> createUserWithEmptyProfile(@RequestBody UserDTO userDTO) {
-        // Crear usuario
+    public ResponseEntity<UserDTO> createUserWithEmptyProfile(@RequestBody @Valid UserDTO userDTO) {
+        // Create a new User entity
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
         
-        // Crear perfil vacío
+        // Create an empty Profile
         Profile profile = new Profile();
-        profile.setName(userDTO.getUsername() + "'s Profile"); // Ejemplo de nombre
-        profile.setEmail(user.getEmail());
-        profile.setUser(user);
+        profile.setUserName(userDTO.getUsername() + "'s Profile");
         
-        // Asociar perfil al usuario
+        
+        // Set the Profile on the User
         user.setProfile(profile);
         
-        // Guardar usuario (y automáticamente el perfil por cascade)
-        user = userService.createUser(UserDTO.fromEntity(user)).toEntity();
+        // Save the User (cascade will save the Profile)
+        User savedUser = userService.createUser(userDTO).toEntity();
         
-        // Devolver respuesta
-        UserDTO responseDTO = new UserDTO(user.getId(), user.getUsername(), user.getEmail());
+        // Convert to DTO for response
+        UserDTO responseDTO = UserDTO.fromEntity(savedUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
     
@@ -54,14 +53,15 @@ public class UserController {
     }
     
     @GetMapping
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @Valid @RequestBody UserDTO userDTO) {
-        UserDTO updatedUser = userService.updateUser(id, userDTO);
-        return ResponseEntity.ok(updatedUser);
+        User updatedUser = userService.updateUser(id, userDTO).toEntity();
+        return ResponseEntity.ok(UserDTO.fromEntity(updatedUser));
     }
     
     @DeleteMapping("/{id}")

@@ -1,53 +1,48 @@
 package io.soulsong.controllers;
 
 import io.soulsong.dtos.ProfileDTO;
-import io.soulsong.entities.Profile;
-import io.soulsong.entities.SongEssence;
-import io.soulsong.exceptions.ResourceNotFoundException;
-import io.soulsong.repositories.ProfileRepository;
-import io.soulsong.repositories.SongEssenceRepository;
+import io.soulsong.dtos.SongEssenceDTO;
 import io.soulsong.services.ProfileService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
-
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/profiles")
 public class ProfileController {
     
     private final ProfileService profileService;
-    private final ProfileRepository profileRepository;
-    private final SongEssenceRepository songEssenceRepository;
     
-    public ProfileController(ProfileService profileService, ProfileRepository profileRepository, SongEssenceRepository songEssenceRepository) {
+    public ProfileController(ProfileService profileService) {
         this.profileService = profileService;
-        this.profileRepository = profileRepository;
-        this.songEssenceRepository = songEssenceRepository;
     }
     
+    @PostMapping
+    public ResponseEntity<?> createProfile(@Valid @RequestBody ProfileDTO profileDTO) {
+        try {
+            ProfileDTO savedProfile = profileService.createProfile(profileDTO);
+            return ResponseEntity.ok(savedProfile);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    
+    
     @GetMapping
-    public ResponseEntity<List<Profile>> getAllProfiles() {
-        List<Profile> profiles = profileRepository.findAll();
+    public ResponseEntity<List<ProfileDTO>> getAllProfiles() {
+        List<ProfileDTO> profiles = profileService.getAllProfiles();
         return ResponseEntity.ok(profiles);
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<ProfileDTO> getProfile(@PathVariable Long id) {
-        Optional<ProfileDTO> profile = profileService.getProfile(id);
-        return profile.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-    
-    @PostMapping
-    public ResponseEntity<ProfileDTO> createProfile(@Valid @RequestBody ProfileDTO profileDTO) {
-        if (!profileService.isUserRegistered(profileDTO.getUserId())) {
-            return ResponseEntity.badRequest().body(null);
-        }
-        ProfileDTO savedProfile = profileService.createProfile(profileDTO);
-        return ResponseEntity.ok(savedProfile);
+        return profileService.getProfile(id)
+              .map(ResponseEntity::ok)
+              .orElse(ResponseEntity.notFound().build());
     }
     
     @PutMapping("/{id}")
@@ -71,24 +66,20 @@ public class ProfileController {
     @PostMapping("/{profileId}/favorite-songs/{trackId}")
     public ResponseEntity<Void> addFavoriteSong(@PathVariable Long profileId,
                                                 @PathVariable Long trackId) {
-        Profile profile = profileRepository.findById(profileId)
-              .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
-        
-        SongEssence songEssence = songEssenceRepository.findById(trackId)
-              .orElseThrow(() -> new ResourceNotFoundException("Song not found"));
-        profile.addFavoriteSong(songEssence);
-        profileRepository.save(profile);
-        
-        return ResponseEntity.ok().build();
+        profileService.addFavoriteSong(profileId, trackId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    
+    @DeleteMapping("/{profileId}/favorite-songs/{trackId}")
+    public ResponseEntity<Void> removeFavoriteSong(@PathVariable Long profileId,
+                                                   @PathVariable Long trackId) {
+        profileService.removeFavoriteSong(profileId, trackId);
+        return ResponseEntity.noContent().build();
     }
     
     @GetMapping("/{profileId}/favorite-songs")
-    public ResponseEntity<List<SongEssence>> getFavoriteSongs(@PathVariable Long profileId) {
-        Profile profile = profileRepository.findById(profileId)
-              .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
-        
-        return ResponseEntity.ok(profile.getFavoriteSongs());
+    public ResponseEntity<List<SongEssenceDTO>> getFavoriteSongs(@PathVariable Long profileId) {
+        List<SongEssenceDTO> favoriteSongs = profileService.getFavoriteSongs(profileId);
+        return ResponseEntity.ok(favoriteSongs);
     }
-    
-    
 }

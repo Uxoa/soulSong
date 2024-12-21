@@ -2,37 +2,39 @@ package io.soulsong.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
+@Table(name = "song_essences")
 public class SongEssence {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambiar a IDENTITY o AUTO
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column
+    @Column(name = "track_id")
+    private String trackId;
+    
+    @Column(name = "song_name")
     private String songName;
     
-    @ManyToMany(mappedBy = "favoriteSongs") // Cambiar 'favorite_songs' a 'favoriteSongs'
-    private List<Profile> profiles = new ArrayList<>();
-    
+    @Column(name = "danceability")
     private float danceability;
+    
+    @Column(name = "energy")
     private float energy;
+    
+    @Column(name = "tempo")
     private float tempo;
+    
+    @Column(name = "valence")
     private float valence;
     
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private Profile profile;
     
-    private Long trackId;
-    
     public SongEssence() {}
     
-    public SongEssence(Long trackId, String songName, float danceability, float energy, float tempo,
-                       float valence) {
+    public SongEssence(String trackId, String songName, float danceability, float energy, float tempo, float valence) {
         this.trackId = trackId;
         this.songName = songName;
         this.danceability = danceability;
@@ -41,9 +43,21 @@ public class SongEssence {
         this.valence = valence;
     }
     
-    public SongEssence(String trackId, String name, float danceability, float energy, float tempo, float valence) {
+    public Long getId() {
+        return id;
     }
     
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getTrackId() {
+        return trackId;
+    }
+    
+    public void setTrackId(String trackId) {
+        this.trackId = trackId;
+    }
     
     public String getSongName() {
         return songName;
@@ -91,13 +105,5 @@ public class SongEssence {
     
     public void setProfile(Profile profile) {
         this.profile = profile;
-    }
-    
-    public void setTrackId(Long trackId) {
-        this.trackId = trackId;
-    }
-    
-    public Long getTrackId() {
-        return trackId;
     }
 }

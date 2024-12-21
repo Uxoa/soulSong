@@ -42,7 +42,7 @@ public class ImageProfile {
     
     public String getImageData() {
         return imageData;
-     
+        
     }
     
     public void setImageData(String imageData) {

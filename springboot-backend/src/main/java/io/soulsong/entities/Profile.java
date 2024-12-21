@@ -1,53 +1,50 @@
 package io.soulsong.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 @Entity
+@Table(name = "profiles")
 public class Profile {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     
     @Column(name = "profile_image")
-    private String profileImage; // Ruta o URL de la imagen de perfil
+    private String profileImage; // Path or URL for the profile image
     
+    @Column(name = "userName")
+    private String userName;
     
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnoreProperties("profile")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonManagedReference
+    @JsonBackReference
     private User user;
-    
-    @Column
-    private String name;
-    
-    @Column
-    private String email;
     
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SongEssence> songEssences = new ArrayList<>();
     
     @ManyToMany
     @JoinTable(
-          name = "favorite_songs", // Nombre de la tabla asociativa
-          joinColumns = @JoinColumn(name = "profile_id"), // Clave foránea de Profile
-          inverseJoinColumns = @JoinColumn(name = "song_essence_id") // Clave foránea de SongEssence
+          name = "favorite_songs", // Name of the join table
+          joinColumns = @JoinColumn(name = "profile_id"), // Foreign key for Profile
+          inverseJoinColumns = @JoinColumn(name = "song_essence_id") // Foreign key for SongEssence
     )
     private List<SongEssence> favoriteSongs = new ArrayList<>();
     
-    public Profile(String profileImage, User user, String name, String email) {
+    public Profile() {}
+    
+    public Profile(String profileImage, User user) {
         this.profileImage = profileImage;
         this.user = user;
-        this.name = name;
-        this.email = email;
     }
-    
-    public Profile() {}
     
     public Long getId() {
         return id;
@@ -57,7 +54,6 @@ public class Profile {
         this.id = id;
     }
     
-   
     public String getProfileImage() {
         return profileImage;
     }
@@ -66,6 +62,13 @@ public class Profile {
         this.profileImage = profileImage;
     }
     
+    public String getUserName() {
+        return userName;
+    }
+    
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
     
     public User getUser() {
         return user;
@@ -73,22 +76,6 @@ public class Profile {
     
     public void setUser(User user) {
         this.user = user;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getEmail() {
-        return email;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
     }
     
     public List<SongEssence> getSongEssences() {
@@ -115,5 +102,68 @@ public class Profile {
     
     public void removeFavoriteSong(SongEssence songEssence) {
         favoriteSongs.remove(songEssence);
+    }
+    
+    @Override
+    public String toString() {
+        return "Profile{" +
+              "id=" + id +
+              ", profileImage='" + profileImage + '\'' +
+              ", user=" + (user != null ? user.getId() : "null") +
+              ", songEssences=" + songEssences +
+              ", favoriteSongs=" + favoriteSongs +
+              '}';
+    }
+    
+    public String getAvatar() {
+        return profileImage;
+    }
+    
+    public void setAvatar(String avatar) {
+        this.profileImage = avatar;
+    }
+    
+    public String getBirthday() {
+        return null;
+    }
+    
+    public void setBirthday(String birthday) {
+        // Do nothing
+    }
+    
+    public String getCountry() {
+        return null;
+    }
+    
+    public void setCountry(String country) {
+        // Do nothing
+    }
+    
+    public String getCity() {
+        return null;
+    }
+    
+    public void setCity(String city) {
+        // Do nothing
+    }
+    
+    public String getCreatedAt() {
+        return null;
+    }
+    
+    public void setCreatedAt(String createdAt) {
+        // Do nothing
+    }
+    
+    public String getUpdatedAt() {
+        return null;
+    }
+    
+    public void setUpdatedAt(String updatedAt) {
+        // Do nothing
+    }
+    
+    public void setFavoriteSongs(List<SongEssence> favoriteSongs) {
+        this.favoriteSongs = favoriteSongs;
     }
 }
