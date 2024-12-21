@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="55568ca8-546f-4464-9262-3c6ad8641b8f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/react-frontend/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/entities/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/.env" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/appointment.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/appointment.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/axios-instance.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/axios-instance.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/pets.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/pets.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/statistics.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/statistics.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/api-services/users.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/api-services/users.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/appointments/AppointmentForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/appointments/AppointmentForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/pets/PetManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/pets/PetManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/components/users/UserTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/components/users/UserTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/hooks/useAppointments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/hooks/useAppointments.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/hooks/usePets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/hooks/usePets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/hooks/useUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/hooks/useUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-frontend/src/vite-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/react-frontend/src/vite-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-backend/src/main/java/io/soulsong/entities/User.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Uxoa&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Uxoa/soulSong.git&quot;,
+    &quot;accountId&quot;: &quot;7c0e0c0b-a5a8-4d8a-a650-93c5432454e5&quot;
+  }
+}</component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2qKyM4CmL6tBnaxiSikSGxw7tsB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="flattenModules" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SoulsongApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;profileEntity&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/springboot-backend/src/main/java/io" />
+      <recent name="$PROJECT_DIR$/springboot-backend/src/main/java" />
+      <recent name="$PROJECT_DIR$/springboot-backend" />
+      <recent name="$PROJECT_DIR$/src/main" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SoulsongApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="soulsong" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.soulsong.soulsong.SoulsongApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="55568ca8-546f-4464-9262-3c6ad8641b8f" name="Changes" comment="" />
+      <created>1734425510000</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734425510000</updated>
+      <workItem from="1734425511605" duration="5221000" />
+      <workItem from="1734430832664" duration="4298000" />
+      <workItem from="1734435150155" duration="3587000" />
+      <workItem from="1734438755168" duration="12463000" />
+      <workItem from="1734464776486" duration="3001000" />
+      <workItem from="1734486073607" duration="109000" />
+      <workItem from="1734486188303" duration="21000" />
+      <workItem from="1734509741456" duration="1086000" />
+      <workItem from="1734511892052" duration="76000" />
+      <workItem from="1734512093523" duration="91000" />
+      <workItem from="1734512185976" duration="94000" />
+      <workItem from="1734512540132" duration="213000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

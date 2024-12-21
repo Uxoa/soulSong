@@ -1,0 +1,55 @@
+@startuml
+entity "User" as User {
+    * id : Long [PK]
+    --
+    * username : String
+    * email : String
+    * password : String
+    --
+    + hasOne Profile
+}
+
+entity "Profile" as Profile {
+    * id : Long [PK]
+    --
+    * name : String
+    * userId : Long [FK]
+    --
+    + belongsTo User
+    + hasMany FavoriteSongs
+}
+
+entity "FavoriteSong" as FavoriteSong {
+    * id : Long [PK]
+    --
+    * songName : String
+    * profileId : Long [FK]
+    --
+    + belongsTo Profile
+    + hasOne SongEssence
+}
+
+entity "SongEssence" as SongEssence {
+    * id : String [PK]
+    --
+    * danceability : Float
+    * energy : Float
+    * tempo : Float
+    * valence : Float
+    --
+    + belongsTo FavoriteSong
+}
+
+entity "Role" as Role {
+    * id : Long [PK]
+    --
+    * roleName : String
+    --
+    + hasMany Users
+}
+
+User "1" -- "1" Profile : "owns"
+Profile "1" -- "*" FavoriteSong : "has"
+FavoriteSong "1" -- "1" SongEssence : "describes"
+Role "*" -- "*" User : "grants"
+@enduml

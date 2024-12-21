@@ -1,0 +1,113 @@
+/* Contenedor principal */
+.user-manager {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #1b1b2f, #23253a);
+    color: #ffffff;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Cabecera */
+.user-manager-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.user-manager-header h1 {
+    font-size: 2.5rem;
+    color: #00e6e6;
+    text-shadow: 0px 4px 6px rgba(0, 230, 230, 0.5);
+    margin-bottom: 1rem;
+}
+
+.create-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #f4a261;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.create-button:hover {
+    background-color: #e76f51;
+}
+
+/* Grid de usuarios */
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Tarjetas de usuario */
+.user-card {
+    background-color: #2a2d45;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+.user-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+    background: #343a5f;
+}
+
+.user-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #00e6e6;
+    font-family: 'Arial', sans-serif;
+}
+
+.user-card p {
+    font-size: 1rem;
+    color: #b8c1ec;
+    font-family: 'Arial', sans-serif;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.edit-button,
+.delete-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+}
+
+.edit-button {
+    background-color: #00e6e6;
+    color: #ffffff;
+}
+
+.delete-button {
+    background-color: #e63946;
+    color: #ffffff;
+}
+
+.edit-button:hover {
+    background-color: #00b4b4;
+}
+
+.delete-button:hover {
+    background-color: #d62839;
+}

@@ -1,0 +1,297 @@
+{
+  "info": {
+    "name": "SoulSong API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Juan\", \"lastName\": \"Pérez\", \"birthday\": \"1985-01-15\", \"email\": \"juan.perez@example.com\", \"phoneNumber\": \"+34 600 123 456\"}"
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/users/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/users/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "1"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\": \"Juan Carlos\", \"lastName\": \"Pérez\", \"birthday\": \"1985-01-15\", \"email\": \"juan.c.perez@example.com\", \"phoneNumber\": \"+34 600 456 789\"}"
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/users/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Get All Profiles",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/profiles",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/profiles",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"favoriteSongs\": [{\"trackId\": \"11dFghVXANMlKmJXsNCbNl\", \"name\": \"Happy\"}]}"
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"favoriteSongs\": [{\"id\": \"11dFghVXANMlKmJXsNCbNl\", \"name\": \"Happy\"}]}"
+            }
+          }
+        },
+        {
+          "name": "Delete Profile",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SongEssence",
+      "item": [
+        {
+          "name": "Get All Songs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/songessence",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence"]
+            }
+          }
+        },
+        {
+          "name": "Get Song by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/songessence/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create Song",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/songessence",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"trackId\": \"31dFghVXANMlKmJXsNCbTf\", \"songName\": \"Energetic\", \"danceability\": 0.9, \"energy\": 0.8, \"tempo\": 140.0, \"valence\": 0.05}"
+            }
+          }
+        },
+        {
+          "name": "Delete Song",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/songessence/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songessence", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile Analysis",
+      "item": [
+        {
+          "name": "Generate Profile Rating",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/profiles/1/analyze",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["profiles", "1", "analyze"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"selectedSongs\": [\"11dFghVXANMlKmJXsNCbNl\", \"31dFghVXANMlKmJXsNCbTf\"]}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ImageProfile",
+      "item": [
+        {
+          "name": "Upload Image",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "http://localhost:8080/image-profiles",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image-profiles"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"mimeType\": \"image/png\", \"imageData\": \"<base64-encoded-data>\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Image by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/image-profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image-profiles", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Image",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8080/image-profiles/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image-profiles", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+
