@@ -24,3 +24,14 @@
 hs_err_pid*
 replay_pid*
 
+# other
+../react-frontend/.vite/
+../.idea/workspace.xml
+../react-frontend/.idea/workspace.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/misc.xml
+.idea/vcs.xml
+..react-frontend/.idea/vcs.xml
+..react-frontend/.idea/misc.xml
+../react-frontend/.idea/modules.xml
