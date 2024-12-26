@@ -1,15 +1,13 @@
 package io.soulsong.controllers;
 
+import io.soulsong.dtos.FavoriteSongDTO;
 import io.soulsong.dtos.ProfileDTO;
-import io.soulsong.dtos.SongEssenceDTO;
 import io.soulsong.services.ProfileService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/profiles")
@@ -30,7 +28,6 @@ public class ProfileController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
     
     @GetMapping
     public ResponseEntity<List<ProfileDTO>> getAllProfiles() {
@@ -57,29 +54,29 @@ public class ProfileController {
         return ResponseEntity.noContent().build();
     }
     
+    
+    @PostMapping("/{profileId}/favorite-songs")
+    public ResponseEntity<FavoriteSongDTO> addFavoriteSong(
+          @PathVariable Long profileId,
+          @Valid @RequestBody FavoriteSongDTO favoriteSongDTO) {
+        FavoriteSongDTO savedFavoriteSong = profileService.addFavoriteSong(profileId, favoriteSongDTO);
+        return ResponseEntity.ok(savedFavoriteSong);
+    }
+    
+    
+    @GetMapping("/{profileId}/favorite-songs")
+    public ResponseEntity<List<FavoriteSongDTO>> getFavoriteSongs(@PathVariable Long profileId) {
+        List<FavoriteSongDTO> favoriteSongs = profileService.getFavoriteSongs(profileId);
+        return ResponseEntity.ok(favoriteSongs);
+    }
+    
     @DeleteMapping("/{id}/empty-data")
     public ResponseEntity<Void> emptyDataProfile(@PathVariable Long id) {
         profileService.emptyDataProfile(id);
         return ResponseEntity.noContent().build();
     }
     
-    @PostMapping("/{profileId}/favorite-songs/{trackId}")
-    public ResponseEntity<Void> addFavoriteSong(@PathVariable Long profileId,
-                                                @PathVariable Long trackId) {
-        profileService.addFavoriteSong(profileId, trackId);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-    
-    @DeleteMapping("/{profileId}/favorite-songs/{trackId}")
-    public ResponseEntity<Void> removeFavoriteSong(@PathVariable Long profileId,
-                                                   @PathVariable Long trackId) {
-        profileService.removeFavoriteSong(profileId, trackId);
-        return ResponseEntity.noContent().build();
-    }
-    
-    @GetMapping("/{profileId}/favorite-songs")
-    public ResponseEntity<List<SongEssenceDTO>> getFavoriteSongs(@PathVariable Long profileId) {
-        List<SongEssenceDTO> favoriteSongs = profileService.getFavoriteSongs(profileId);
-        return ResponseEntity.ok(favoriteSongs);
-    }
 }
+
+
+

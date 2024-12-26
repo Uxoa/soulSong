@@ -17,16 +17,16 @@ public class SongEssence {
     private String songName;
     
     @Column(name = "danceability")
-    private float danceability;
+    private Double danceability;
     
     @Column(name = "energy")
-    private float energy;
+    private Double energy;
     
     @Column(name = "tempo")
-    private float tempo;
+    private Double tempo;
     
     @Column(name = "valence")
-    private float valence;
+    private Double valence;
     
     @ManyToOne
     @JoinColumn(name = "profile_id")
@@ -34,13 +34,18 @@ public class SongEssence {
     
     public SongEssence() {}
     
-    public SongEssence(String trackId, String songName, float danceability, float energy, float tempo, float valence) {
+    public SongEssence(Long id, String trackId, String songName, Double danceability, Double energy, Double tempo, Double valence, Profile profile) {
+        this.id = id;
         this.trackId = trackId;
         this.songName = songName;
         this.danceability = danceability;
         this.energy = energy;
         this.tempo = tempo;
         this.valence = valence;
+        this.profile = profile;
+    }
+    
+    public SongEssence(Long id, double danceability, double energy, double valence, double tempo) {
     }
     
     public Long getId() {
@@ -67,35 +72,35 @@ public class SongEssence {
         this.songName = songName;
     }
     
-    public float getDanceability() {
+    public double getDanceability() {
         return danceability;
     }
     
-    public void setDanceability(float danceability) {
+    public void setDanceability(Double danceability) {
         this.danceability = danceability;
     }
     
-    public float getEnergy() {
+    public double getEnergy() {
         return energy;
     }
     
-    public void setEnergy(float energy) {
+    public void setEnergy(Double energy) {
         this.energy = energy;
     }
     
-    public float getTempo() {
+    public double getTempo() {
         return tempo;
     }
     
-    public void setTempo(float tempo) {
+    public void setTempo(Double tempo) {
         this.tempo = tempo;
     }
     
-    public float getValence() {
+    public double getValence() {
         return valence;
     }
     
-    public void setValence(float valence) {
+    public void setValence(Double valence) {
         this.valence = valence;
     }
     

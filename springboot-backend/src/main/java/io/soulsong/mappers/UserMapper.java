@@ -22,7 +22,10 @@ public class UserMapper {
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setPassword(user.getPassword());
-        dto.setProfile(ProfileDTO.fromEntity(user.getProfile()));
+        dto.setBirthday(user.getBirthday());
+        if (user.getProfile() != null) {
+            dto.setProfile(ProfileDTO.fromEntityWithoutUser(user.getProfile())); // Avoid cyclic reference
+        }
         return dto;
     }
     
@@ -31,10 +34,13 @@ public class UserMapper {
         user.setId(dto.getId());
         user.setFirstname(dto.getFirstname());
         user.setLastname(dto.getLastname());
+        user.setBirthday(dto.getBirthday());
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
-        user.setProfile(ProfileDTO.toEntity(dto.getProfile()));
+        if (dto.getProfile() != null) {
+            user.setProfile(ProfileDTO.toEntity(dto.getProfile()));
+        }
         return user;
     }
     

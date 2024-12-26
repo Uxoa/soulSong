@@ -2,7 +2,7 @@ package io.soulsong.controllers;
 
 import io.soulsong.dtos.SongEssenceDTO;
 import io.soulsong.entities.SongEssence;
-import io.soulsong.services.SpotifyService;
+import io.soulsong.services.external.SpotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,11 +1,9 @@
 package io.soulsong.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,17 +15,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "firstname", unique = true)
+    @Column(name = "firstname", nullable = false)
     private String firstname;
     
-    @Column(name = "lastname", unique = true)
+    @Column(name = "lastname", nullable = false)
     private String lastname;
     
-    @Column(name = "username", unique = true)
-    private String username;
+    @Column(name = "birthday", nullable = false)
+    private LocalDate birthday;
     
-    @Column(name = "birthday")
-    private Date birthday;
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
     
     @Column(name = "password", nullable = false)
     private String password;
@@ -35,9 +33,7 @@ public class User {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
     
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    @JsonBackReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Profile profile;
     
     @ManyToMany
@@ -74,22 +70,22 @@ public class User {
         this.lastname = lastname;
     }
     
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+    
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+    
     public String getUsername() {
         return username;
-    
     }
     
     public void setUsername(String username) {
         this.username = username;
     }
     
-    public Date getBirthday() {
-        return birthday;
-    }
-    
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
     
     public String getPassword() {
         return password;
@@ -114,7 +110,7 @@ public class User {
     public void setProfile(Profile profile) {
         this.profile = profile;
         if (profile != null) {
-            profile.setUser(this);
+            profile.setUser(this); // Sincronizar relación bidireccional
         }
     }
     
@@ -126,16 +122,4 @@ public class User {
         this.roles = roles;
     }
     
-    @Override
-    public String toString() {
-        return "User{" +
-              "id=" + id +
-              ", firstname='" + firstname + '\'' +
-              ", lastname='" + lastname + '\'' +
-              ", password='" + password + '\'' +
-              ", email='" + email + '\'' +
-              ", profile=" + (profile != null ? profile.getId() : "Vacio") +
-              ", roles=" + roles +
-              '}';
-    }
 }

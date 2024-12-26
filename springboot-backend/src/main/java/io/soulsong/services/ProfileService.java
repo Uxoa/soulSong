@@ -1,15 +1,23 @@
 package io.soulsong.services;
 
+import io.soulsong.dtos.FavoriteSongDTO;
 import io.soulsong.dtos.ProfileDTO;
-import io.soulsong.dtos.SongEssenceDTO;
+import io.soulsong.entities.FavoriteSong;
 import io.soulsong.entities.Profile;
+import io.soulsong.entities.SongEssence;
 import io.soulsong.entities.User;
+import io.soulsong.mappers.FavoriteSongMapper;
+import io.soulsong.mappers.ProfileMapper;
+import io.soulsong.repositories.FavoriteSongRepository;
 import io.soulsong.repositories.ProfileRepository;
+import io.soulsong.repositories.SongEssenceRepository;
 import io.soulsong.repositories.UserRepository;
+import io.soulsong.services.external.SpotifyService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,126 +25,113 @@ import java.util.stream.Collectors;
 @Service
 public class ProfileService {
     
-    private final ProfileRepository profileRepository;
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
+    private final SongEssenceRepository songEssenceRepository;
+    private final FavoriteSongRepository favoriteSongRepository;
+    private final SpotifyService spotifyService;
+    private final FavoriteSongService favoriteSongService; // Dependencia añadida
     
-    public ProfileService(ProfileRepository profileRepository, UserRepository userRepository) {
-        this.profileRepository = profileRepository;
+    public ProfileService(UserRepository userRepository,
+                          ProfileRepository profileRepository,
+                          SongEssenceRepository songEssenceRepository,
+                          FavoriteSongRepository favoriteSongRepository,
+                          SpotifyService spotifyService,
+                          FavoriteSongService favoriteSongService) { // Constructor actualizado
         this.userRepository = userRepository;
+        this.profileRepository = profileRepository;
+        this.songEssenceRepository = songEssenceRepository;
+        this.favoriteSongRepository = favoriteSongRepository;
+        this.spotifyService = spotifyService;
+        this.favoriteSongService = favoriteSongService;
     }
     
- 
+    @Transactional
     public ProfileDTO createProfile(ProfileDTO profileDTO) {
-        // Verifica si el usuario existe
-        if (!userRepository.existsById(profileDTO.getUserId())) {
-            throw new RuntimeException("Para crear un perfil, debe registrarse");
-        }
-        
-        // Si el usuario existe, procede a crear el perfil
         User user = userRepository.findById(profileDTO.getUserId())
-              .orElseThrow(() -> new RuntimeException("User not found"));
+              .orElseThrow(() -> new RuntimeException("Para crear un perfil, debe registrarse"));
         
-        Profile profile = new Profile();
+        Profile profile = ProfileMapper.toEntity(profileDTO);
         profile.setUser(user);
-        profile.setUserName(profileDTO.getUserName());
         
         Profile savedProfile = profileRepository.save(profile);
-        return ProfileDTO.fromEntity(savedProfile);
+        return ProfileMapper.toDTO(savedProfile);
     }
     
+    @Transactional
     public void deleteProfile(Long id) {
         if (!profileRepository.existsById(id)) {
-            throw new EntityNotFoundException("Profile not found");
+            throw new EntityNotFoundException("Perfil no encontrado");
         }
         profileRepository.deleteById(id);
     }
     
     public Optional<ProfileDTO> getProfile(Long id) {
         return profileRepository.findById(id)
-              .map(ProfileDTO::fromEntity);
+              .map(ProfileMapper::toDTO);
     }
     
     public List<ProfileDTO> getAllProfiles() {
         return profileRepository.findAll().stream()
-              .map(ProfileDTO::fromEntity)
+              .map(ProfileMapper::toDTO)
               .collect(Collectors.toList());
     }
     
+    @Transactional
     public ProfileDTO updateProfile(Long id, ProfileDTO profileDTO) {
-        // Buscar el perfil
         Profile profile = profileRepository.findById(id)
-              .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
+              .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado"));
         
-        // Actualizar información del perfil
         profile.setUserName(profileDTO.getUserName());
         
-        // Actualizar canciones favoritas (si se incluyen en el DTO)
-        if (profileDTO.getFavoriteSongs() != null) {
-            profile.getFavoriteSongs().clear();
-            profile.getFavoriteSongs().addAll(
-                  profileDTO.getFavoriteSongs().stream()
-                        .map(SongEssenceDTO::toEntity)
-                        .collect(Collectors.toList())
-            );
+        Profile updatedProfile = profileRepository.save(profile);
+        return ProfileMapper.toDTO(updatedProfile);
+    }
+    
+    @Transactional
+    public FavoriteSongDTO addFavoriteSong(Long profileId, FavoriteSongDTO favoriteSongDTO) {
+        Profile profile = profileRepository.findById(profileId)
+              .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado"));
+        
+        SongEssence songEssence = songEssenceRepository.findById(favoriteSongDTO.getSongEssence().getId())
+              .orElseGet(() -> songEssenceRepository.save(favoriteSongDTO.getSongEssence().toEntity()));
+        
+        FavoriteSong favoriteSong = new FavoriteSong();
+        favoriteSong.setProfile(profile);
+        favoriteSong.setSongEssence(songEssence);
+        favoriteSong.setAddedDate(LocalDateTime.now());
+        
+        FavoriteSong savedFavoriteSong = favoriteSongService.addFavorite(favoriteSong);
+        
+        return FavoriteSongMapper.toDTO(savedFavoriteSong);
+    }
+    
+    @Transactional
+    public void removeFavoriteSong(Long profileId, Long favoriteSongId) {
+        FavoriteSong favoriteSong = favoriteSongRepository.findById(favoriteSongId)
+              .orElseThrow(() -> new EntityNotFoundException("Canción favorita no encontrada"));
+        
+        if (!favoriteSong.getProfile().getId().equals(profileId)) {
+            throw new RuntimeException("La canción favorita no pertenece al perfil especificado");
         }
         
-        Profile updatedProfile = profileRepository.save(profile);
-        return ProfileDTO.fromEntity(updatedProfile);
+        favoriteSongRepository.delete(favoriteSong);
     }
     
-    public boolean isUserRegistered(Long userId) {
-        return userRepository.existsById(userId);
-    }
-    
-    
-    public void addFavoriteSong(Long profileId, Long trackId) {
-        Profile profile = profileRepository.findById(profileId)
-              .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
-        
-        // Buscar la canción y agregarla a la lista de favoritos
-        profile.addFavoriteSong(
-              profile.getSongEssences().stream()
-                    .filter(song -> song.getId().equals(trackId))
-                    .findFirst()
-                    .orElseThrow(() -> new EntityNotFoundException("Song not found"))
-        );
-        
-        profileRepository.save(profile);
-    }
-    
-    public void removeFavoriteSong(Long profileId, Long trackId) {
-        Profile profile = profileRepository.findById(profileId)
-              .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
-        
-        // Buscar la canción y removerla de la lista de favoritos
-        profile.removeFavoriteSong(
-              profile.getFavoriteSongs().stream()
-                    .filter(song -> song.getId().equals(trackId))
-                    .findFirst()
-                    .orElseThrow(() -> new EntityNotFoundException("Song not found"))
-        );
-        
-        profileRepository.save(profile);
-    }
-    
+    @Transactional
     public void emptyDataProfile(Long id) {
         Profile profile = profileRepository.findById(id)
-              .orElseThrow(() -> new RuntimeException("Profile not found"));
+              .orElseThrow(() -> new RuntimeException("Perfil no encontrado"));
         
-        // Vaciar canciones favoritas
-        profile.getFavoriteSongs().clear();
-        profileRepository.save(profile);
+        favoriteSongRepository.deleteAll(profile.getFavoriteSongs());
     }
     
-    public List<SongEssenceDTO> getFavoriteSongs(Long profileId) {
+    public List<FavoriteSongDTO> getFavoriteSongs(Long profileId) {
         Profile profile = profileRepository.findById(profileId)
-              .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
+              .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado"));
         
         return profile.getFavoriteSongs().stream()
-              .map(SongEssenceDTO::fromEntity)
+              .map(FavoriteSongMapper::toDTO)
               .collect(Collectors.toList());
     }
-    
-    
-    
 }

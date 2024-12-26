@@ -3,6 +3,7 @@ package io.soulsong.services;
 import io.soulsong.dtos.UserDTO;
 import io.soulsong.entities.Profile;
 import io.soulsong.entities.User;
+import io.soulsong.mappers.UserMapper;
 import io.soulsong.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 public class UserService {
     
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.userMapper = new UserMapper();
     }
     
     /**
@@ -26,18 +29,20 @@ public class UserService {
      * @return The created UserDTO.
      */
     public UserDTO createUser(UserDTO userDTO) {
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        validateUserInput(userDTO);
         
-        Profile profile = new Profile();
-        profile.setUserName(userDTO.getUsername() + "'s Profile");
+        // Check if email or username already exists
+        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email ya está registrado: " + userDTO.getEmail());
+        }
+        if (userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
+            throw new IllegalArgumentException("Nombre de usuario ya está registrado: " + userDTO.getUsername());
+        }
         
-        user.setProfile(profile);
-        
-        User savedUser = userRepository.save(user);
-        return UserDTO.fromEntity(savedUser);
+        User user = userMapper.toEntity(userDTO);
+        user = userRepository.save(user);
+        return userMapper.fromEntity(user);
+        // Save User with Profile
     }
     
     /**
@@ -73,12 +78,13 @@ public class UserService {
         User user = userRepository.findById(id)
               .orElseThrow(() -> new RuntimeException("User not found"));
         
+        // Update user fields
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         
-        // Only update the password if it's provided
+        // Only update the password if provided
         if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
-            user.setPassword(userDTO.getPassword()); // Add hashing here if necessary
+            user.setPassword(userDTO.getPassword()); // Add password hashing here if necessary
         }
         
         User updatedUser = userRepository.save(user);
@@ -95,5 +101,19 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
         userRepository.deleteById(id);
+    }
+    
+    /**
+     * Validates the user input.
+     *
+     * @param userDTO The user data to validate.
+     */
+    private void validateUserInput(UserDTO userDTO) {
+        if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("La contraseña no puede estar vacía");
+        }
+        if (userDTO.getPassword().length() < 8) {
+            throw new IllegalArgumentException("La contraseña debe tener al menos 8 caracteres");
+        }
     }
 }

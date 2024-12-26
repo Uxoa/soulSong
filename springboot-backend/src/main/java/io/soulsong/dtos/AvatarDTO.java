@@ -1,7 +1,7 @@
 package io.soulsong.dtos;
 
 // ImageProfileDTO
-public class ImageProfileDTO {
+public class AvatarDTO {
     private Long id;
     private String mimeType;
     private String imageData; // Almacena como Base64

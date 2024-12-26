@@ -3,7 +3,7 @@ package io.soulsong.entities;
 import jakarta.persistence.*;
 
 @Entity
-public class ImageProfile {
+public class Avatar {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class ImageProfile {
     @JoinColumn(name = "profile_id")
     private Profile profile;
     
-    public ImageProfile() {}
+    public Avatar() {}
     
     public Long getId() {
         return id;

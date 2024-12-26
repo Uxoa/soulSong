@@ -16,8 +16,7 @@ public class ProfileDTO {
     private String city;
     private String createdAt;
     private String updatedAt;
-    private List<SongEssenceDTO> favoriteSongs;
-
+    private List<FavoriteSongDTO> favoriteSongs;
     
     public ProfileDTO() {}
     
@@ -93,11 +92,11 @@ public class ProfileDTO {
         return updatedAt;
     }
     
-    public List<SongEssenceDTO> getFavoriteSongs() {
+    public List<FavoriteSongDTO> getFavoriteSongs() {
         return favoriteSongs;
     }
     
-    public void setFavoriteSongs(List<SongEssenceDTO> favoriteSongs) {
+    public void setFavoriteSongs(List<FavoriteSongDTO> favoriteSongs) {
         this.favoriteSongs = favoriteSongs;
     }
     
@@ -113,9 +112,10 @@ public class ProfileDTO {
         dto.setId(profile.getId());
         dto.setUserId(profile.getUser().getId());
         dto.setUserName(profile.getUserName());
+        dto.setAvatar(profile.getAvatar());
         dto.setFavoriteSongs(
               profile.getFavoriteSongs().stream()
-                    .map(SongEssenceDTO::fromEntity)
+                    .map(FavoriteSongDTO::fromEntity) // Conversión correcta
                     .collect(Collectors.toList())
         );
         return dto;
@@ -125,9 +125,10 @@ public class ProfileDTO {
         ProfileDTO dto = new ProfileDTO();
         dto.setId(profile.getId());
         dto.setUserName(profile.getUserName());
+        dto.setAvatar(profile.getAvatar());
         dto.setFavoriteSongs(
               profile.getFavoriteSongs().stream()
-                    .map(SongEssenceDTO::fromEntity)
+                    .map(FavoriteSongDTO::fromEntity) // Conversión correcta
                     .collect(Collectors.toList())
         );
         return dto;

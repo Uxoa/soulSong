@@ -1,12 +1,18 @@
 package io.soulsong.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.soulsong.entities.User;
+
+import java.time.LocalDate;
+
 
 public class UserDTO {
     
     private Long id;
     private String firstname;
     private String lastname;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
     private String username;
     private String email;
     private String password;
@@ -38,6 +44,14 @@ public class UserDTO {
         this.lastname = lastname;
     }
     
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+    
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -45,6 +59,7 @@ public class UserDTO {
     public void setUsername(String username) {
         this.username = username;
     }
+    
     
     public String getEmail() {
         return email;
@@ -75,6 +90,7 @@ public class UserDTO {
         dto.setId(user.getId());
         dto.setFirstname(user.getFirstname());
         dto.setLastname(user.getLastname());
+        dto.setBirthday(user.getBirthday());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         if (user.getProfile() != null) {
@@ -89,6 +105,7 @@ public class UserDTO {
         user.setId(this.id);
         user.setFirstname(this.firstname);
         user.setLastname(this.lastname);
+        user.setBirthday(this.birthday);
         user.setEmail(this.email);
         user.setPassword(this.password);
         return user;

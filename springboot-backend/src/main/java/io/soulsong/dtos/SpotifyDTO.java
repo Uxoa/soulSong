@@ -82,7 +82,7 @@ public class SpotifyDTO {
         }
         
         @JsonProperty("danceability")
-        public float getDanceability() {
+        public double getDanceability() {
             return danceability;
         }
         
@@ -91,7 +91,7 @@ public class SpotifyDTO {
         }
         
         @JsonProperty("energy")
-        public float getEnergy() {
+        public double getEnergy() {
             return energy;
         }
         
@@ -100,7 +100,7 @@ public class SpotifyDTO {
         }
         
         @JsonProperty("tempo")
-        public float getTempo() {
+        public double getTempo() {
             return tempo;
         }
         
@@ -109,7 +109,7 @@ public class SpotifyDTO {
         }
         
         @JsonProperty("valence")
-        public float getValence() {
+        public double getValence() {
             return valence;
         }
         

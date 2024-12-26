@@ -3,31 +3,38 @@ package io.soulsong.mappers;
 import io.soulsong.dtos.ProfileDTO;
 import io.soulsong.entities.Profile;
 
+import java.util.stream.Collectors;
+
 public class ProfileMapper {
-      
-      public ProfileMapper() {}
-      
-      public ProfileDTO toDTO(Profile profile) {
-          ProfileDTO profileDTO = new ProfileDTO();
-          profileDTO.setId(profile.getId());
-          profileDTO.setAvatar(profile.getAvatar());
-          profileDTO.setBirthday(profile.getBirthday());
-          profileDTO.setCountry(profile.getCountry());
-          profileDTO.setCity(profile.getCity());
-          profileDTO.setCreatedAt(profile.getCreatedAt());
-          profileDTO.setUpdatedAt(profile.getUpdatedAt());
-          return profileDTO;
-      }
-      
-      public Profile toEntity(ProfileDTO profileDTO) {
-          Profile profile = new Profile();
-          profile.setId(profileDTO.getId());
-          profile.setAvatar(profileDTO.getAvatar());
-          profile.setBirthday(profileDTO.getBirthday());
-          profile.setCountry(profileDTO.getCountry());
-          profile.setCity(profileDTO.getCity());
-          profile.setCreatedAt(profileDTO.getCreatedAt());
-          profile.setUpdatedAt(profileDTO.getUpdatedAt());
-          return profile;
-      }
+    
+    public static Profile toEntity(ProfileDTO profileDTO) {
+        if (profileDTO == null) {
+            return null;
+        }
+        
+        Profile profile = new Profile();
+        profile.setId(profileDTO.getId());
+        profile.setUserName(profileDTO.getUserName());
+        profile.setAvatar(profileDTO.getAvatar());
+        // Las relaciones complejas como `user` y `favoriteSongs` deben manejarse en el servicio
+        return profile;
+    }
+    
+    public static ProfileDTO toDTO(Profile profile) {
+        if (profile == null) {
+            return null;
+        }
+        
+        ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setId(profile.getId());
+        profileDTO.setUserName(profile.getUserName());
+        profileDTO.setAvatar(profile.getAvatar());
+        profileDTO.setFavoriteSongs(
+              profile.getFavoriteSongs().stream()
+                    .map(FavoriteSongMapper::toDTO)
+                    .collect(Collectors.toList())
+        );
+        profileDTO.setUserId(profile.getUser() != null ? profile.getUser().getId() : null);
+        return profileDTO;
+    }
 }
