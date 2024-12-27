@@ -6,6 +6,39 @@ import java.util.List;
 
 public class SpotifyDTO {
     
+    public static class UserProfile {
+        private String id;
+        private String displayName;
+        private String email;
+        
+        @JsonProperty("id")
+        public String getId() {
+            return id;
+        }
+        
+        public void setId(String id) {
+            this.id = id;
+        }
+        
+        @JsonProperty("display_name")
+        public String getDisplayName() {
+            return displayName;
+        }
+        
+        public void setDisplayName(String displayName) {
+            this.displayName = displayName;
+        }
+        
+        @JsonProperty("email")
+        public String getEmail() {
+            return email;
+        }
+        
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    }
+    
     public static class SearchResult {
         @JsonProperty("tracks")
         private Tracks tracks;

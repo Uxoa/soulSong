@@ -2,7 +2,7 @@ package io.soulsong.services.external;
 
 import io.soulsong.entities.SongEssence;
 import io.soulsong.dtos.SpotifyDTO;
-import io.soulsong.services.SpotifyAuthService;
+import io.soulsong.auth.SpotifyAuthorizationFlow;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -10,11 +10,34 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class SpotifyService {
     
     private final WebClient webClient;
-    private final SpotifyAuthService spotifyAuthService;
+    private final SpotifyAuthorizationFlow spotifyAuthorizationFlow;
     
-    public SpotifyService(WebClient.Builder webClientBuilder, SpotifyAuthService spotifyAuthService) {
+    public SpotifyService(WebClient.Builder webClientBuilder, SpotifyAuthorizationFlow spotifyAuthorizationFlow) {
         this.webClient = webClientBuilder.baseUrl("https://api.spotify.com/v1").build();
-        this.spotifyAuthService = spotifyAuthService;
+        this.spotifyAuthorizationFlow = spotifyAuthorizationFlow;
+    }
+    
+    /**
+     * Obtener el perfil del usuario autenticado.
+     *
+     * @return Una instancia de SpotifyDTO.UserProfile con la información del usuario.
+     */
+    public SpotifyDTO.UserProfile getCurrentUserProfile() {
+        String token = "Bearer " + getValidAccessToken();
+        
+        SpotifyDTO.UserProfile userProfile = webClient
+              .get()
+              .uri("/me")
+              .header("Authorization", token)
+              .retrieve()
+              .bodyToMono(SpotifyDTO.UserProfile.class)
+              .block();
+        
+        if (userProfile == null) {
+            throw new RuntimeException("No se pudo obtener el perfil del usuario autenticado.");
+        }
+        
+        return userProfile;
     }
     
     /**
@@ -35,7 +58,7 @@ public class SpotifyService {
      * @return Una instancia de SongEssence con las métricas de audio.
      */
     public SongEssence getAudioFeatures(String trackId) {
-        String token = "Bearer " + spotifyAuthService.getAccessToken();
+        String token = "Bearer " + getValidAccessToken();
         SpotifyDTO.AudioFeatures audioFeatures = webClient
               .get()
               .uri("/audio-features/{id}", trackId)
@@ -57,6 +80,7 @@ public class SpotifyService {
         );
     }
     
+    
     /**
      * Buscar canciones en Spotify.
      *
@@ -64,7 +88,7 @@ public class SpotifyService {
      * @return Un SearchResult con los resultados de la búsqueda.
      */
     public SpotifyDTO.SearchResult searchTracks(String query) {
-        String token = "Bearer " + spotifyAuthService.getAccessToken();
+        String token = "Bearer " + getValidAccessToken();
         SpotifyDTO.SearchResult searchResult = webClient
               .get()
               .uri(uriBuilder -> uriBuilder
@@ -109,7 +133,7 @@ public class SpotifyService {
      * @return Una instancia de Track con los detalles.
      */
     private SpotifyDTO.Track fetchTrack(String trackId) {
-        String token = "Bearer " + spotifyAuthService.getAccessToken();
+        String token = "Bearer " + getValidAccessToken();
         SpotifyDTO.Track track = webClient
               .get()
               .uri("/tracks/{id}", trackId)
@@ -123,5 +147,14 @@ public class SpotifyService {
         }
         
         return track;
+    }
+    
+    /**
+     * Validar y obtener un token de acceso válido.
+     *
+     * @return Token de acceso válido.
+     */
+    private String getValidAccessToken() {
+        return spotifyAuthorizationFlow.getAccessToken();
     }
 }

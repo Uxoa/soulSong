@@ -20,6 +20,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
+    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -28,11 +29,10 @@ public class SecurityConfig {
                     .frameOptions(frameOptions -> frameOptions.sameOrigin()) // Permite iframes de la misma URL
               )
               .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/h2-console/**","/profiles/**", "/api/**", "/*","/**").permitAll()
+                    .requestMatchers("/h2-console/**", "/profiles/**", "/api/**", "/*", "/**").permitAll()
                     .anyRequest().authenticated()
               );
         
         return http.build();
     }
 }
-
