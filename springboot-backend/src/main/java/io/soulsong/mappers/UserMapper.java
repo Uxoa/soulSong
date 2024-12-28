@@ -19,10 +19,10 @@ public class UserMapper {
         dto.setId(user.getId());
         dto.setFirstname(user.getFirstname());
         dto.setLastname(user.getLastname());
+        dto.setBirthday(user.getBirthday());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
         dto.setPassword(user.getPassword());
-        dto.setBirthday(user.getBirthday());
         if (user.getProfile() != null) {
             dto.setProfile(ProfileDTO.fromEntityWithoutUser(user.getProfile())); // Avoid cyclic reference
         }

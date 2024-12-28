@@ -5,6 +5,7 @@ import io.soulsong.entities.Profile;
 import io.soulsong.entities.User;
 import io.soulsong.mappers.UserMapper;
 import io.soulsong.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,21 +29,28 @@ public class UserService {
      * @param userDTO User data for creation.
      * @return The created UserDTO.
      */
-    public UserDTO createUser(UserDTO userDTO) {
-        validateUserInput(userDTO);
+    @Transactional
+    public User createUserWithEmptyProfile(UserDTO userDTO) {
+        // Crear entidad User desde DTO
+        User user = new User();
+        user.setFirstname(userDTO.getFirstname());
+        user.setLastname(userDTO.getLastname());
+        user.setBirthday(userDTO.getBirthday());
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
         
-        // Check if email or username already exists
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email ya está registrado: " + userDTO.getEmail());
-        }
-        if (userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
-            throw new IllegalArgumentException("Nombre de usuario ya está registrado: " + userDTO.getUsername());
-        }
+        // Crear perfil vacío y asignarlo al usuario
+        Profile profile = new Profile();
+        profile.setUserName(userDTO.getUsername() + "'s Profile");
+        profile.setAvatar("https://default-avatar.com/avatar.png"); // Avatar por defecto
+        profile.setUser(user);
         
-        User user = userMapper.toEntity(userDTO);
-        user = userRepository.save(user);
-        return userMapper.fromEntity(user);
-        // Save User with Profile
+        // Asignar perfil al usuario
+        user.setProfile(profile);
+        
+        // Guardar usuario (CascadeType.ALL guarda el perfil automáticamente)
+        return userRepository.save(user);
     }
     
     /**

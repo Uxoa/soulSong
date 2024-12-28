@@ -23,7 +23,7 @@ public class Profile {
     private User user;
     
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<FavoriteSong> favoriteSongs = new ArrayList<>();
+    private List<Song> songs = new ArrayList<>();
     
     public Profile() {}
     
@@ -59,11 +59,18 @@ public class Profile {
         this.user = user;
     }
     
-    public List<FavoriteSong> getFavoriteSongs() {
-        return favoriteSongs;
+    public List<Song> getSongs() {
+        return songs;
     }
     
-    public void setFavoriteSongs(List<FavoriteSong> favoriteSongs) {
-        this.favoriteSongs = favoriteSongs;
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+    
+    public void setUserId(Long userId) {
+        if (this.user == null) {
+            this.user = new User();
+        }
+        this.user.setId(userId);
     }
 }

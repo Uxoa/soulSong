@@ -1,31 +1,32 @@
 package io.soulsong.controllers;
 
-import io.soulsong.dtos.FavoriteSongDTO;
-import io.soulsong.services.ProfileService;
+import io.soulsong.dtos.SongDTO;
+import io.soulsong.services.SongService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/favorites")
+@RequestMapping("/songs")
 public class SongController {
     
-    private final ProfileService profileService;
+    private final SongService songService;
     
-    public SongController(ProfileService profileService) {
-        this.profileService = profileService;
+    public SongController(SongService songService) {
+        this.songService = songService;
     }
     
-    @PostMapping("/{profileId}")
-    public ResponseEntity<FavoriteSongDTO> addFavorite(@PathVariable Long profileId, @RequestBody FavoriteSongDTO favoriteSongDTO) {
-        FavoriteSongDTO savedFavorite = profileService.addFavoriteSong(profileId, favoriteSongDTO);
-        return ResponseEntity.ok(savedFavorite);
-    }
-    
-    @GetMapping("/{profileId}")
-    public ResponseEntity<List<FavoriteSongDTO>> getFavorites(@PathVariable Long profileId) {
-        List<FavoriteSongDTO> favorites = profileService.getFavoriteSongs(profileId);
-        return ResponseEntity.ok(favorites);
+    @PostMapping("/add/{profileId}")
+    public ResponseEntity<?> addSongToProfile(
+          @PathVariable Long profileId, // Cambia @RequestParam por @PathVariable
+          @Valid @RequestBody SongDTO songDTO) {
+        try {
+            return ResponseEntity.ok(songService.addSongToProfile(profileId, songDTO));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error interno del servidor: " + e.getMessage());
+        }
     }
 }

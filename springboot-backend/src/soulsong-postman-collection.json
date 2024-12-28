@@ -8,7 +8,7 @@
       "name": "User",
       "item": [
         {
-          "name": "Create User",
+          "name": "Create User with Empty Profile",
           "request": {
             "method": "POST",
             "header": [
@@ -19,7 +19,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\",\n  \"username\": \"john.doe\",\n  \"password\": \"securepassword\",\n  \"email\": \"john.doe@example.com\"\n}"
+              "raw": "{\n  \"username\": \"john.doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"securepassword\"\n}"
             },
             "url": {
               "raw": "http://localhost:8080/users",
@@ -31,10 +31,22 @@
           }
         },
         {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/users/{id}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "{id}"]
+            }
+          }
+        },
+        {
           "name": "Get All Users",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:8080/users",
               "protocol": "http",
@@ -45,16 +57,25 @@
           }
         },
         {
-          "name": "Get User By ID",
+          "name": "Update User",
           "request": {
-            "method": "GET",
-            "header": [],
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"john.updated\",\n  \"email\": \"john.updated@example.com\",\n  \"password\": \"updatedpassword\"\n}"
+            },
             "url": {
-              "raw": "http://localhost:8080/users/1",
+              "raw": "http://localhost:8080/users/{id}",
               "protocol": "http",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["users", "1"]
+              "path": ["users", "{id}"]
             }
           }
         },
@@ -62,13 +83,12 @@
           "name": "Delete User",
           "request": {
             "method": "DELETE",
-            "header": [],
             "url": {
-              "raw": "http://localhost:8080/users/1",
+              "raw": "http://localhost:8080/users/{id}",
               "protocol": "http",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["users", "1"]
+              "path": ["users", "{id}"]
             }
           }
         }
@@ -78,89 +98,88 @@
       "name": "Profile",
       "item": [
         {
-          "name": "Create Profile",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"userName\": \"John's Profile\",\n  \"avatar\": \"https://example.com/avatar.png\",\n  \"userId\": 1\n}"
-            },
-            "url": {
-              "raw": "http://localhost:8080/profiles",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["profiles"]
-            }
-          }
-        },
-        {
           "name": "Get All Profiles",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "http://localhost:8080/profiles",
               "protocol": "http",
               "host": ["localhost"],
               "port": "8080",
               "path": ["profiles"]
-            }
-          }
-        },
-        {
-          "name": "Get Profile By ID",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8080/profiles/1",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["profiles", "1"]
-            }
-          }
-        },
-        {
-          "name": "Delete Profile",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8080/profiles/1",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["profiles", "1"]
             }
           }
         }
       ]
     },
     {
-      "name": "Favorite Song",
+      "name": "Spotify",
       "item": [
         {
-          "name": "Add Favorite Song",
+          "name": "Get User Profile from Spotify",
           "request": {
-            "method": "POST",
+            "method": "GET",
             "header": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                "key": "Authorization",
+                "value": "Bearer <YOUR_ACCESS_TOKEN>"
               }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"profileId\": 1,\n  \"songName\": \"Song 1\"\n}"
-            },
+            "url": {
+              "raw": "http://localhost:8080/api/user-profile",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "user-profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SongEssence",
+      "item": [
+        {
+          "name": "Analyze Track by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/songs/analyze/{trackId}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songs", "analyze", "{trackId}"]
+            }
+          }
+        },
+        {
+          "name": "Search Tracks",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/songs/search?query={query}",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["songs", "search"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "{query}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Favorite Songs",
+      "item": [
+        {
+          "name": "Get All Favorite Songs",
+          "request": {
+            "method": "GET",
             "url": {
               "raw": "http://localhost:8080/favorites",
               "protocol": "http",
@@ -171,30 +190,25 @@
           }
         },
         {
-          "name": "Get All Favorite Songs",
+          "name": "Add a Favorite Song",
           "request": {
-            "method": "GET",
-            "header": [],
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"profileId\": 1,\n  \"songId\": \"track1\"\n}"
+            },
             "url": {
-              "raw": "http://localhost:8080/favorites/1",
+              "raw": "http://localhost:8080/favorites",
               "protocol": "http",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["favorites", "1"]
-            }
-          }
-        },
-        {
-          "name": "Delete Favorite Song",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8080/favorites/1",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["favorites", "1"]
+              "path": ["favorites"]
             }
           }
         }

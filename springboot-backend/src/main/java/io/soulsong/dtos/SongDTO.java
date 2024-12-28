@@ -1,6 +1,7 @@
 package io.soulsong.dtos;
 
-import io.soulsong.entities.FavoriteSong;
+import io.soulsong.entities.Song;
+
 import java.time.LocalDateTime;
 
 public class SongDTO {
@@ -12,7 +13,7 @@ public class SongDTO {
     private LocalDateTime addedDate;
     private String trackId; // Campo trackId utilizado en el mapeo
     
-    public FavoriteSongDTO() {}
+    public SongDTO() {}
     
     // Getters y Setters
     public Long getId() {
@@ -66,17 +67,17 @@ public class SongDTO {
     /**
      * Convierte una entidad de tipo FavoriteSong a su representación DTO.
      *
-     * @param favoriteSong Entidad FavoriteSong a convertir
-     * @return FavoriteSongDTO con los datos convertidos
+     * @param song Entidad FavoriteSong a convertir
+     * @return SongDTO con los datos convertidos
      */
-    public static FavoriteSongDTO fromEntity(FavoriteSong favoriteSong) {
-        FavoriteSongDTO dto = new FavoriteSongDTO();
-        dto.setId(favoriteSong.getId());
-        dto.setProfileId(favoriteSong.getProfile().getId());
-        dto.setSongTitle(favoriteSong.getSongEssence().getSongName());
-        dto.setSongEssence(SongEssenceDTO.fromEntity(favoriteSong.getSongEssence()));
-        dto.setAddedDate(favoriteSong.getAddedDate());
-        dto.setTrackId(favoriteSong.getSongEssence().getTrackId());
+    public static SongDTO fromEntity(Song song) {
+        SongDTO dto = new SongDTO();
+        dto.setId(song.getId());
+        dto.setProfileId(song.getProfile().getId());
+        dto.setSongTitle(song.getSongEssence().getSongName());
+        dto.setSongEssence(SongEssenceDTO.fromEntity(song.getSongEssence()));
+        dto.setAddedDate(song.getAddedDate());
+        dto.setTrackId(song.getSongEssence().getTrackId());
         return dto;
     }
 }

@@ -157,4 +157,16 @@ public class SpotifyService {
     private String getValidAccessToken() {
         return spotifyAuthorizationFlow.getAccessToken();
     }
+    
+    /**
+     * Analiza una canción usando su track ID y devuelve las características de audio.
+     *
+     * @param trackId El ID de la canción en Spotify.
+     * @return Una instancia de SongEssence con las características analizadas.
+     */
+    public SongEssence analyzeSong(String trackId) {
+        // Reutiliza getAudioFeatures para obtener las características de la canción
+        return getAudioFeatures(trackId);
+    }
+    
 }

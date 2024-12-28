@@ -23,25 +23,12 @@ public class UserController {
     
     @PostMapping
     public ResponseEntity<UserDTO> createUserWithEmptyProfile(@RequestBody @Valid UserDTO userDTO) {
-        // Create a new User entity
-        User user = new User();
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
+        // Convertir UserDTO a User y manejar la creación de Profile en el servicio
+        User savedUser = userService.createUserWithEmptyProfile(userDTO);
         
-        // Create an empty Profile
-        Profile profile = new Profile();
-        profile.setUserName(userDTO.getUsername() + "'s Profile");
-        
-        
-        // Set the Profile on the User
-        user.setProfile(profile);
-        
-        // Save the User (cascade will save the Profile)
-        User savedUser = userService.createUser(userDTO).toEntity();
-        
-        // Convert to DTO for response
+        // Convertir el usuario guardado a DTO para la respuesta
         UserDTO responseDTO = UserDTO.fromEntity(savedUser);
+        
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
     

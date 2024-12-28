@@ -11,12 +11,7 @@ public class ProfileDTO {
     private Long userId;
     private String userName;
     private String avatar;
-    private String birthday;
-    private String country;
-    private String city;
-    private String createdAt;
-    private String updatedAt;
-    private List<FavoriteSongDTO> favoriteSongs;
+    private List<SongDTO> songs;
     
     public ProfileDTO() {}
     
@@ -52,52 +47,12 @@ public class ProfileDTO {
         this.avatar = avatar;
     }
     
-    public String getBirthday() {
-        return birthday;
+    public List<SongDTO> getSongs() {
+        return songs;
     }
     
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-    
-    public String getCountry() {
-        return country;
-    }
-    
-    public void setCountry(String country) {
-        this.country = country;
-    }
-    
-    public String getCity() {
-        return city;
-    }
-    
-    public void setCity(String city) {
-        this.city = city;
-    }
-    
-    public String getCreatedAt() {
-        return createdAt;
-    }
-    
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-    
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-    
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-    
-    public List<FavoriteSongDTO> getFavoriteSongs() {
-        return favoriteSongs;
-    }
-    
-    public void setFavoriteSongs(List<FavoriteSongDTO> favoriteSongs) {
-        this.favoriteSongs = favoriteSongs;
+    public void setFavoriteSongs(List<SongDTO> songs) {
+        this.songs = songs;
     }
     
     
@@ -114,8 +69,8 @@ public class ProfileDTO {
         dto.setUserName(profile.getUserName());
         dto.setAvatar(profile.getAvatar());
         dto.setFavoriteSongs(
-              profile.getFavoriteSongs().stream()
-                    .map(FavoriteSongDTO::fromEntity) // Conversión correcta
+              profile.getSongs().stream()
+                    .map(SongDTO::fromEntity) // Conversión correcta
                     .collect(Collectors.toList())
         );
         return dto;
@@ -124,11 +79,12 @@ public class ProfileDTO {
     public static ProfileDTO fromEntityWithoutUser(Profile profile) {
         ProfileDTO dto = new ProfileDTO();
         dto.setId(profile.getId());
+        dto.setUserId(profile.getUser().getId());
         dto.setUserName(profile.getUserName());
         dto.setAvatar(profile.getAvatar());
         dto.setFavoriteSongs(
-              profile.getFavoriteSongs().stream()
-                    .map(FavoriteSongDTO::fromEntity) // Conversión correcta
+              profile.getSongs().stream()
+                    .map(SongDTO::fromEntity) // Conversión correcta
                     .collect(Collectors.toList())
         );
         return dto;
@@ -143,6 +99,7 @@ public class ProfileDTO {
     public static Profile toEntity(ProfileDTO profile) {
         Profile entity = new Profile();
         entity.setId(profile.getId());
+        entity.setUserId(profile.getUserId());
         entity.setUserName(profile.getUserName());
         return entity;
     }

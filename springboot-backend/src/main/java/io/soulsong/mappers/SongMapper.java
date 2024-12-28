@@ -1,8 +1,6 @@
 package io.soulsong.mappers;
 
-import io.soulsong.dtos.FavoriteSongDTO;
 import io.soulsong.dtos.SongDTO;
-import io.soulsong.entities.FavoriteSong;
 import io.soulsong.entities.Song;
 
 public class SongMapper {
@@ -17,7 +15,7 @@ public class SongMapper {
             return null;
         }
         
-        FavoriteSong favoriteSong = new FavoriteSong();
+        Song favoriteSong = new Song();
         favoriteSong.setId(favoriteSongDTO.getId());
         favoriteSong.setAddedDate(favoriteSongDTO.getAddedDate());
         
@@ -27,27 +25,27 @@ public class SongMapper {
     
     /**
      * Convierte una entidad FavoriteSong a un DTO.
-     * @param favoriteSong La entidad FavoriteSong.
+     * @param song La entidad FavoriteSong.
      * @return El DTO de FavoriteSong.
      */
-    public static FavoriteSongDTO toDTO(FavoriteSong favoriteSong) {
-        if (favoriteSong == null) {
+    public static SongDTO toDTO(Song song) {
+        if (song == null) {
             return null;
         }
         
-        FavoriteSongDTO favoriteSongDTO = new FavoriteSongDTO();
-        favoriteSongDTO.setId(favoriteSong.getId());
+        SongDTO songDTO = new SongDTO();
+        songDTO.setId(song.getId());
         
-        if (favoriteSong.getProfile() != null) {
-            favoriteSongDTO.setProfileId(favoriteSong.getProfile().getId());
+        if (song.getProfile() != null) {
+            songDTO.setProfileId(song.getProfile().getId());
         }
         
-        if (favoriteSong.getSongEssence() != null) {
-            favoriteSongDTO.setSongEssence(SongEssenceMapper.toDTO(favoriteSong.getSongEssence()));
-            favoriteSongDTO.setTrackId(favoriteSong.getSongEssence().getTrackId());
+        if (song.getSongEssence() != null) {
+            songDTO.setSongEssence(SongEssenceMapper.toDTO(song.getSongEssence()));
+            songDTO.setTrackId(song.getSongEssence().getTrackId());
         }
         
-        favoriteSongDTO.setAddedDate(favoriteSong.getAddedDate());
-        return favoriteSongDTO;
+        songDTO.setAddedDate(song.getAddedDate());
+        return songDTO;
     }
 }

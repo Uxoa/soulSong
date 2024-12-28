@@ -93,6 +93,7 @@ public class UserDTO {
         dto.setBirthday(user.getBirthday());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
+        dto.setPassword(user.getPassword());
         if (user.getProfile() != null) {
             dto.setProfile(ProfileDTO.fromEntityWithoutUser(user.getProfile())); // Evita referencia cíclica
         }
@@ -106,8 +107,12 @@ public class UserDTO {
         user.setFirstname(this.firstname);
         user.setLastname(this.lastname);
         user.setBirthday(this.birthday);
+        user.setUsername(this.username);
         user.setEmail(this.email);
         user.setPassword(this.password);
+        if (this.profile != null) {
+            user.setProfile(ProfileDTO.toEntity(this.profile));
+        }
         return user;
     }
     

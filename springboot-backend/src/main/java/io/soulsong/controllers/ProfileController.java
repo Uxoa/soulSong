@@ -1,7 +1,7 @@
 package io.soulsong.controllers;
 
-import io.soulsong.dtos.FavoriteSongDTO;
 import io.soulsong.dtos.ProfileDTO;
+import io.soulsong.entities.Profile;
 import io.soulsong.services.ProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +31,7 @@ public class ProfileController {
     
     @GetMapping
     public ResponseEntity<List<ProfileDTO>> getAllProfiles() {
-        List<ProfileDTO> profiles = profileService.getAllProfiles();
-        return ResponseEntity.ok(profiles);
+        return ResponseEntity.ok(profileService.getAllProfiles());
     }
     
     @GetMapping("/{id}")
@@ -44,8 +43,7 @@ public class ProfileController {
     
     @PutMapping("/{id}")
     public ResponseEntity<ProfileDTO> editProfile(@PathVariable Long id, @Valid @RequestBody ProfileDTO profileDTO) {
-        ProfileDTO updatedProfile = profileService.updateProfile(id, profileDTO);
-        return ResponseEntity.ok(updatedProfile);
+        return ResponseEntity.ok(profileService.updateProfile(id, profileDTO));
     }
     
     @DeleteMapping("/{id}")
@@ -54,29 +52,14 @@ public class ProfileController {
         return ResponseEntity.noContent().build();
     }
     
-    
-    @PostMapping("/{profileId}/favorite-songs")
-    public ResponseEntity<FavoriteSongDTO> addFavoriteSong(
-          @PathVariable Long profileId,
-          @Valid @RequestBody FavoriteSongDTO favoriteSongDTO) {
-        FavoriteSongDTO savedFavoriteSong = profileService.addFavoriteSong(profileId, favoriteSongDTO);
-        return ResponseEntity.ok(savedFavoriteSong);
-    }
-    
-    
-    @GetMapping("/{profileId}/favorite-songs")
-    public ResponseEntity<List<FavoriteSongDTO>> getFavoriteSongs(@PathVariable Long profileId) {
-        List<FavoriteSongDTO> favoriteSongs = profileService.getFavoriteSongs(profileId);
-        return ResponseEntity.ok(favoriteSongs);
-    }
-    
     @DeleteMapping("/{id}/empty-data")
     public ResponseEntity<Void> emptyDataProfile(@PathVariable Long id) {
         profileService.emptyDataProfile(id);
         return ResponseEntity.noContent().build();
     }
     
+    @GetMapping("/match-profiles")
+    public List<Profile> matchProfiles(@RequestParam String trackId) {
+        return profileService.findCompatibleProfiles(trackId);
+    }
 }
-
-
-
