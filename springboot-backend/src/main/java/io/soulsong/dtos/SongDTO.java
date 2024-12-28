@@ -3,7 +3,7 @@ package io.soulsong.dtos;
 import io.soulsong.entities.FavoriteSong;
 import java.time.LocalDateTime;
 
-public class FavoriteSongDTO {
+public class SongDTO {
     
     private Long id;
     private Long profileId;

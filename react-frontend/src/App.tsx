@@ -1,27 +1,27 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
-import UserManager from "./components/users/UserManager";
-import ProfileManager from "./components/profiles/ProfileManager";
-import SongManager from "./components/songs/SongManager";
-import ProfileView from "./components/profiles/ProfileView";
+import ProfileManager from "./components/profiles/ProfileManager"; // Para listar perfiles
+import ProfileView from "./components/profiles/ProfileView"; // Para detalles de un perfil
+import UserManager from "./components/users/UserManager"; // Administra usuarios (si sigue siendo necesario)
+import UserDetails from "./components/users/UserDetail"; // Detalles de usuarios (si aplica)
 
 const App = () => {
-  return (
-    <Router>
-      <Navbar />
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<UserManager />} />
-            <Route path="/profiles" element={<ProfileManager />} />
-            <Route path="/profiles/:id" element={<ProfileView />} />
-          <Route path="/songs" element={<SongManager />} />
-        </Routes>
-      </main>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                {/* Ruta principal para el dashboard */}
+                <Route path="/dashboard" element={<Dashboard />} />
+
+                {/* Rutas para perfiles */}
+                <Route path="/profiles" element={<ProfileManager />} />
+                <Route path="/profiles/:id" element={<ProfileView />} />
+
+                {/* Rutas para usuarios (si se requieren en backend o administración) */}
+                <Route path="/users" element={<UserManager />} />
+                <Route path="/users/:id" element={<UserDetails />} />
+            </Routes>
+        </Router>
+    );
 };
 
 export default App;

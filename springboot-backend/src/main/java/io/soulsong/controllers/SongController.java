@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/favorites")
-public class FavoriteSongController {
+public class SongController {
     
     private final ProfileService profileService;
     
-    public FavoriteSongController(ProfileService profileService) {
+    public SongController(ProfileService profileService) {
         this.profileService = profileService;
     }
     

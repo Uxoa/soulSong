@@ -1,16 +1,18 @@
 package io.soulsong.mappers;
 
 import io.soulsong.dtos.FavoriteSongDTO;
+import io.soulsong.dtos.SongDTO;
 import io.soulsong.entities.FavoriteSong;
+import io.soulsong.entities.Song;
 
-public class FavoriteSongMapper {
+public class SongMapper {
     
     /**
      * Convierte un DTO de FavoriteSong a una entidad.
      * @param favoriteSongDTO El DTO de FavoriteSong.
      * @return La entidad FavoriteSong.
      */
-    public static FavoriteSong toEntity(FavoriteSongDTO favoriteSongDTO) {
+    public static Song toEntity(SongDTO favoriteSongDTO) {
         if (favoriteSongDTO == null) {
             return null;
         }

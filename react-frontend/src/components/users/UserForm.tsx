@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { UserDTO } from '../../api-services/users.services';
+import React, { useState } from "react";
+import { UserDTO } from "../../types";
 
 interface UserFormProps {
-    user?: UserDTO; // Cambiamos null por undefined
+    user?: UserDTO;
     onSave: (user: UserDTO) => void;
     onCancel: () => void;
+    onClose: () => void; // Agregado onClose aquí
 }
 
 const defaultUser: UserDTO = {
-    name: '',
-    email: '',
-    role: '', // Provide a default value for role
-    favoriteSongs: [] // Provide a default value for favoriteSongs
+    name: "",
+    email: "",
+    role: "", // Asegúrate de que esto existe en UserDTO
+    favoriteSongs: [],
 };
 
-const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
-    const [formData, setFormData] = useState<UserDTO>(
-        user || defaultUser
-    );
+const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel, onClose }) => {
+    const [formData, setFormData] = useState<UserDTO>(user || defaultUser);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,6 +25,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSave(formData);
+        onClose(); // Llamada onClose al guardar
     };
 
     return (
@@ -35,7 +35,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
                 <input
                     type="text"
                     name="name"
-                    value={formData.name || ''}
+                    value={formData.name || ""}
                     onChange={handleChange}
                     required
                 />
@@ -45,7 +45,17 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave, onCancel }) => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email || ''}
+                    value={formData.email || ""}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+            <div>
+                <label>Role:</label>
+                <input
+                    type="text"
+                    name="role"
+                    value={formData.role || ""}
                     onChange={handleChange}
                     required
                 />

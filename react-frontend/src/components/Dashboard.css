@@ -4,93 +4,168 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 20px;
     min-height: 100vh;
-    background: linear-gradient(145deg, #1b1b2f, #23253a);
-    color: #ffffff;
-    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #1cb5e0);
+    color: #e0e0e0;
+    font-family: "Poppins", sans-serif;
+    overflow-y: auto;
     text-align: center;
 }
 
 /* Cabecera */
 .dashboard-header {
     width: 100%;
-    height: 380px; /* Fixed height for the banner */
-    background-image: url('/public/images/banner01.webp');
-    background-size: cover; /* Ensure the image covers the entire banner */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    margin-bottom: 2rem;
+    height: 380px;
+    background-image: url('/public/images/banner03.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 15px;
 }
 
 .dashboard-header h1 {
-    font-size: 4rem;
+    position: relative;
+    font-size: 3.8rem;
     color: #ffffff;
-    text-shadow: 0px 5px 8px #000000;
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
     margin-bottom: 1rem;
+    z-index: 1;
 }
 
 .dashboard-header p {
-    font-size: 1.2rem;
+    position: relative;
+    font-size: 1.4rem;
     color: #b8c1ec;
+    z-index: 1;
+    margin: 0;
 }
 
 /* Contenedor de tarjetas */
 .dashboard-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
     width: 100%;
     max-width: 1200px;
-    margin-top: 1rem;
 }
 
 /* Tarjetas individuales */
 .dashboard-card {
-    background: #2a2d45;
-    padding: 1.5rem;
-    border-radius: 12px;
+    background: linear-gradient(145deg, #1f1c2c, #302b63); /* Fondo oscuro 3D */
+    padding: 20px;
+    border-radius: 25px;
     text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: inset 0 -5px 15px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
     color: #ffffff;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Fondo decorativo circular */
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    /*background: radial-gradient(circle, rgba(28, 181, 224, 0.2), transparent);*/
+    z-index: 0;
 }
 
 .dashboard-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
-    background: #343a5f;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(92, 132, 255, 0.6);
 }
 
+.dashboard-card .card01{
+    background-image: url("../../public/images/iconUser03 copia.png");
+    background-position: center;
+    background-size: cover;
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    color: #ff6e40; /* Naranja vibrante */
+    padding: 10px;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 110, 64, 0.6);
+}
+
+/* Ícono central */
 .dashboard-card .card-icon {
     font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #f4a261;
+    margin-bottom: 1.5rem;
+    color: #ff6e40; /* Naranja vibrante */
+    background: linear-gradient(145deg, #ff6e40, #ff8f71);
+    height:100px;
+    width:100px;
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 110, 64, 0.6);
 }
 
+.dashboard-card:hover .card-icon {
+    transform: scale(1.2);
+    color: #ffffff;
+    background: linear-gradient(145deg, #1cb5e0, #58a6ff); /* Turquesa */
+    box-shadow: 0 8px 20px rgba(92, 132, 255, 0.6);
+}
+
+/* Título */
 .dashboard-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 1rem 0;
-    color: #00e6e6;
+    font-weight: 600;
+    color: #ffffff;
 }
 
+/* Descripción */
 .dashboard-card p {
     font-size: 1rem;
     color: #b8c1ec;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-    .dashboard-header h1 {
-        font-size: 2rem;
-    }
+/* Botones dentro de las tarjetas */
+.dashboard-card button {
+    background: linear-gradient(90deg, #ff6e40, #ff8f71); /* Naranja */
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-    .dashboard-header p {
-        font-size: 1rem;
-    }
-
-    .dashboard-card {
-        padding: 1rem;
-    }
+.dashboard-card button:hover {
+    background: linear-gradient(90deg, #1cb5e0, #58a6ff); /* Cambia a turquesa */
+    box-shadow: 0 4px 15px rgba(92, 132, 255, 0.6);
 }

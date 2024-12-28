@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class FavoriteSong {
+public class Song {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

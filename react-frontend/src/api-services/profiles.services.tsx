@@ -1,5 +1,5 @@
 import axiosInstance from './axios-instance';
-import { ProfileDTO } from "../types";
+import {Profile, ProfileDTO} from "../types";
 
 /**
  * Obtener todos los perfiles.
@@ -42,4 +42,12 @@ export const updateProfile = async (
  */
 export const deleteProfile = async (id: number): Promise<void> => {
   await axiosInstance.delete(`/profiles/${id}`);
+};
+
+export const profileService = {
+  getProfiles: () => axiosInstance.get<Profile[]>("/profiles"),
+  getProfile: (id: string) => axiosInstance.get<Profile>(`/profiles/${id}`),
+  createProfile: (data: Profile) => axiosInstance.post<Profile>("/profiles", data),
+  updateProfile: (id: string, data: Profile) => axiosInstance.put<Profile>(`/profiles/${id}`, data),
+  deleteProfile: (id: string) => axiosInstance.delete<void>(`/profiles/${id}`),
 };

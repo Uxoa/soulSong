@@ -5,8 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5a66f66-d540-4c5c-9026-9e8e52596357" name="Changes" comment="Feat: upgrading frontend files">
+      <change afterPath="$PROJECT_DIR$/src/components/profiles/ProfileCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/users/UserDetails.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/repositories/SongRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/SongService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-services/users.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-services/users.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/Profile.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/Profile.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileManager.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileManager.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/UserDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/UserDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/UserForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/UserForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/UserManager.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/UserManager.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/users/UserManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/UserManager.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/UseProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/controllers/FavoriteSongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/controllers/SongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/controllers/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/FavoriteSongDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/SongDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/ProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/ProfileDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/entities/FavoriteSong.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/entities/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/entities/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/entities/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/FavoriteSongMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/SongMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/ProfileMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/ProfileMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/repositories/FavoriteSongRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/FavoriteSongService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/ProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/external/SpotifyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/external/SpotifyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/soulsong-postman-collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/soulsong-postman-collection.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +65,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript JSX File" />
-        <option value="CSS File" />
         <option value="TypeScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -61,6 +103,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.index.ts.executor": "Run",
     "Node.js.useProfiles.ts.executor": "Run",
     "Node.js.vite.config.ts.executor": "Run",
     "Notification.DisplayName-DoNotAsk-AMII Info": "AMII Info",
@@ -69,6 +112,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.preview.features.used": "true",
+    "jsx.switch.disabled": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong/react-frontend",
     "list.type.of.created.stylesheet": "CSS",
@@ -80,7 +124,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
     "ts.external.directory.path": "/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong/react-frontend/node_modules/typescript/lib",
     "ts.rename.search.for.dynamic.occurrences": "true",
     "vue.rearranger.settings.migration": "true"
@@ -154,7 +198,17 @@
       <workItem from="1734704748953" duration="1195000" />
       <workItem from="1734721315284" duration="2446000" />
       <workItem from="1734739890345" duration="1308000" />
-      <workItem from="1734747461750" duration="602000" />
+      <workItem from="1734747461750" duration="4830000" />
+      <workItem from="1734862276710" duration="1420000" />
+      <workItem from="1734902825975" duration="598000" />
+      <workItem from="1734987643448" duration="340000" />
+      <workItem from="1734988386428" duration="598000" />
+      <workItem from="1734991161626" duration="598000" />
+      <workItem from="1734993512754" duration="599000" />
+      <workItem from="1734999116457" duration="1077000" />
+      <workItem from="1735204566061" duration="9363000" />
+      <workItem from="1735312253585" duration="12063000" />
+      <workItem from="1735341549710" duration="23669000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: upgrading frontend files">
       <option name="closed" value="true" />

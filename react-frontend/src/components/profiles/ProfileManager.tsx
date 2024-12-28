@@ -1,50 +1,37 @@
-import { useNavigate } from "react-router-dom";
-import useProfiles from "../../hooks/useProfiles";
-import "./ProfileManager.css"; // Import the CSS file for styling
+import React from "react";
+import useProfiles from "../../hooks/useProfiles"; // Hook para obtener perfiles
+import ProfileCard from "./ProfileCard";
+import "./ProfileManager.css";
 
-const ProfileManager = () => {
-  const { profiles, loading, error } = useProfiles();
-  const navigate = useNavigate();
+const ProfileManager: React.FC = () => {
+    const { profiles, loading, error } = useProfiles();
 
-  const handleViewProfile = (id: string) => {
-    navigate(`/profiles/${id}`);
-  };
+    if (loading) return <p>Loading profiles...</p>;
+    if (error) return <p>Error loading profiles: {error}</p>;
 
-  if (loading) return <p>Loading profiles...</p>;
-  if (error) return <p>Error loading profiles: {error}</p>;
-
-  return (
-    <div className="profile-manager">
-      <h1>User Profiles</h1>
-      <div className="profile-cards">
-        {profiles.map((profile) => (
-          <div key={profile.id} className="profile-card">
-            <img
-              src={profile.imageUrl}
-              alt={`${profile.name}'s profile`}
-              className="profile-image"
-            />
-            <h2>{profile.name}</h2>
-            <p>Favorite Song: {profile.favoriteSong?.name || "None"}</p>
-            <div className="profile-buttons">
-              <button
-                onClick={() => handleViewProfile(profile.id)}
-                className="btn-profile"
-              >
-                View Profile
-              </button>
-              <button
-                onClick={() => navigate(`/profiles/${profile.id}/similar`)}
-                className="btn-similar"
-              >
-                Find Similar
-              </button>
+    return (
+        <div className="user-manager-container">
+            <header className="user-manager-header">
+                <h2>Explore Profiles</h2>
+                <div className="header-icons">
+                    <span className="icon">🔍</span>
+                    <span className="icon">🔔</span>
+                    <span className="icon">⋮</span>
+                </div>
+            </header>
+            <div className="user-manager-grid">
+                {profiles.map((profile) => (
+                    <ProfileCard
+                        key={profile.id}
+                        id={profile.id}
+                        name={profile.name}
+                        imageUrl={profile.imageUrl}
+                        favoriteSong={profile.favoriteSong?.name}
+                    />
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default ProfileManager;

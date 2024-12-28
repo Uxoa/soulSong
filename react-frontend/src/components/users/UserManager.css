@@ -1,113 +1,139 @@
-/* Contenedor principal */
-.user-manager {
-    padding: 2rem;
+.user-manager-container {
+    /*background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); !* Fondo degradado *!*/
+    background: linear-gradient(135deg, #0f0c29, #302b63, #1cb5e0); /* Fondo turquesa integrado */
+    color: #e0e0e0;
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background: linear-gradient(145deg, #1b1b2f, #23253a);
-    color: #ffffff;
-    min-height: 100vh;
-    font-family: 'Arial', sans-serif;
+    overflow-y: auto;
 }
 
-/* Cabecera */
 .user-manager-header {
-    text-align: center;
-    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.user-manager-header h1 {
-    font-size: 2.5rem;
-    color: #00e6e6;
-    text-shadow: 0px 4px 6px rgba(0, 230, 230, 0.5);
-    margin-bottom: 1rem;
+.user-manager-header h2 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 600;
 }
 
-.create-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    background-color: #f4a261;
+.story-circle {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #ff6e40, #ff8f71);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #ffffff;
+    margin-right: auto;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(255, 110, 64, 0.6);
+    transition: all 0.3s ease;
+}
+
+.story-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 8px 20px rgba(255, 110, 64, 0.8);
+}
+
+.header-icons .icon {
+    margin-left: 15px;
+    font-size: 20px;
+    color: #bbbbbb;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.header-icons .icon:hover {
+    transform: scale(1.2);
+    color: #f39c12;
+}
+
+.user-manager-filters {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.user-manager-filters button {
+    background: linear-gradient(90deg, #6c63ff, #58a6ff);
     color: #ffffff;
     border: none;
-    border-radius: 8px;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: 'Arial', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.create-button:hover {
-    background-color: #e76f51;
+.user-manager-filters button:hover {
+    background: linear-gradient(90deg, #58a6ff, #6c63ff);
+    box-shadow: 0 4px 15px rgba(92, 132, 255, 0.5);
 }
 
-/* Grid de usuarios */
-.user-grid {
+.user-manager-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
 }
 
-/* Tarjetas de usuario */
 .user-card {
-    background-color: #2a2d45;
-    border-radius: 12px;
-    padding: 1.5rem;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    padding: 20px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Arial', sans-serif;
+    position: relative;
 }
 
 .user-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
-    background: #343a5f;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(92, 132, 255, 0.6);
+}
+
+.user-status {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.user-status.online {
+    background-color: #00ff6a;
+}
+
+.user-status.offline {
+    background-color: #ff4c4c;
 }
 
 .user-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #00e6e6;
-    font-family: 'Arial', sans-serif;
+    margin: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
 }
 
 .user-card p {
-    font-size: 1rem;
-    color: #b8c1ec;
-    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #c0c0c0;
 }
 
-.card-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-}
-
-.edit-button,
-.delete-button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    font-family: 'Arial', sans-serif;
-}
-
-.edit-button {
-    background-color: #00e6e6;
-    color: #ffffff;
-}
-
-.delete-button {
-    background-color: #e63946;
-    color: #ffffff;
-}
-
-.edit-button:hover {
-    background-color: #00b4b4;
-}
-
-.delete-button:hover {
-    background-color: #d62839;
+.user-likes {
+    font-size: 14px;
+    color: #f39c12;
 }

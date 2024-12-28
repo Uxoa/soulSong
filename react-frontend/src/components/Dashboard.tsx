@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 
 const Dashboard: React.FC = () => {
+    const navigate = useNavigate();
+
+    const handleNavigate = (path: string) => {
+        navigate(path);
+    };
+
     return (
         <div className="dashboard">
             <header className="dashboard-header">
@@ -9,23 +16,10 @@ const Dashboard: React.FC = () => {
                 <p>The only & one no gender dating app!</p>
             </header>
             <div className="dashboard-cards">
-                {/* Card 1 */}
-                <div className="dashboard-card">
-                    <div className="card-icon">👥</div>
-                    <h3>Users</h3>
-                    <p>Manage all registered users in the application.</p>
-                </div>
-                {/* Card 2 */}
-                <div className="dashboard-card">
-                    <div className="card-icon">📂</div>
+                <div className="dashboard-card" onClick={() => handleNavigate("/profiles")}>
+                    <div className="card01"> </div>
                     <h3>Profiles</h3>
-                    <p>Manage profiles created by users.</p>
-                </div>
-                {/* Card 3 */}
-                <div className="dashboard-card">
-                    <div className="card-icon">🎵</div>
-                    <h3>Songs</h3>
-                    <p>Explore and organize the song library.</p>
+                    <p>Explore and manage user profiles.</p>
                 </div>
             </div>
         </div>
