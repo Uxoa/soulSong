@@ -20,6 +20,8 @@ public class Song {
     
     private LocalDateTime addedDate;
     
+    private String trackId;
+    
     // Getters y Setters
     public Long getId() {
         return id;
@@ -51,5 +53,13 @@ public class Song {
     
     public void setAddedDate(LocalDateTime addedDate) {
         this.addedDate = addedDate;
+    }
+    
+    public String getTrackId() {
+        return trackId;
+    }
+    
+    public void setTrackId(String trackId) {
+        this.trackId = trackId;
     }
 }

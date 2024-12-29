@@ -18,9 +18,9 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
-        this.userMapper = new UserMapper();
+        this.userMapper = userMapper; // Inyectamos la dependencia
     }
     
     /**
@@ -43,7 +43,7 @@ public class UserService {
         // Crear perfil vacío y asignarlo al usuario
         Profile profile = new Profile();
         profile.setUserName(userDTO.getUsername() + "'s Profile");
-        profile.setAvatar("https://default-avatar.com/avatar.png"); // Avatar por defecto
+        profile.setAvatarUrl("https://default-avatar.com/avatar.png"); // Avatar por defecto
         profile.setUser(user);
         
         // Asignar perfil al usuario
@@ -60,7 +60,7 @@ public class UserService {
      */
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
-              .map(UserDTO::fromEntity)
+              .map(userMapper::fromEntity) // Usamos el mapper inyectado
               .collect(Collectors.toList());
     }
     
@@ -72,7 +72,7 @@ public class UserService {
      */
     public Optional<UserDTO> getUserById(Long id) {
         return userRepository.findById(id)
-              .map(UserDTO::fromEntity);
+              .map(userMapper::fromEntity); // Usamos el mapper inyectado
     }
     
     /**
@@ -96,7 +96,7 @@ public class UserService {
         }
         
         User updatedUser = userRepository.save(user);
-        return UserDTO.fromEntity(updatedUser);
+        return userMapper.fromEntity(updatedUser); // Usamos el mapper inyectado
     }
     
     /**

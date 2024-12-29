@@ -10,7 +10,7 @@ public class Avatar {
     private Long id;
     
     @Column
-    private String mimeType;
+    private String avatarUrl;
     
     @Lob
     @Column
@@ -30,14 +30,12 @@ public class Avatar {
         this.id = id;
     }
     
-    
-    
-    public String getMimeType() {
-        return mimeType;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
     
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
     
     public String getImageData() {

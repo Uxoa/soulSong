@@ -2,12 +2,20 @@ package io.soulsong.mappers;
 
 import io.soulsong.dtos.ProfileDTO;
 import io.soulsong.entities.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+@Component
 public class ProfileMapper {
     
-    public static Profile toEntity(ProfileDTO profileDTO) {
+    private final SongMapper songMapper;
+    
+    public ProfileMapper(SongMapper songMapper) {
+        this.songMapper = songMapper;
+    }
+    
+    public Profile toEntity(ProfileDTO profileDTO) {
         if (profileDTO == null) {
             return null;
         }
@@ -16,27 +24,26 @@ public class ProfileMapper {
         profile.setId(profileDTO.getId());
         profile.setUserId(profileDTO.getUserId());
         profile.setUserName(profileDTO.getUserName());
-        profile.setAvatar(profileDTO.getAvatar());
-        // Las relaciones complejas como `user` y `favoriteSongs` deben manejarse en el servicio
+        profile.setAvatarUrl(profileDTO.getAvatarUrl());
+        // Las relaciones complejas como `user` y `Songs` deben manejarse en el servicio
         return profile;
     }
     
-    public static ProfileDTO toDTO(Profile profile) {
+    public ProfileDTO toDTO(Profile profile) {
         if (profile == null) {
             return null;
         }
         
         ProfileDTO profileDTO = new ProfileDTO();
         profileDTO.setId(profile.getId());
-        profileDTO.setUserId(profile.getUser().getId());
+        profileDTO.setUserId(profile.getUser() != null ? profile.getUser().getId() : null);
         profileDTO.setUserName(profile.getUserName());
-        profileDTO.setAvatar(profile.getAvatar());
-        profileDTO.setFavoriteSongs(
+        profileDTO.setAvatarUrl(profile.getAvatarUrl());
+        profileDTO.setSongs(
               profile.getSongs().stream()
-                    .map(SongMapper::toDTO)
+                    .map(songMapper::toDTO) // Usa la instancia inyectada de SongMapper
                     .collect(Collectors.toList())
         );
-        profileDTO.setUserId(profile.getUser() != null ? profile.getUser().getId() : null);
         return profileDTO;
     }
 }

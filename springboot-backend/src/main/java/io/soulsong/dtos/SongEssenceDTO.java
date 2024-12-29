@@ -69,16 +69,9 @@ public class SongEssenceDTO {
         this.valence = valence;
     }
     
-    /**
-     * Convierte una entidad SongEssence en un SongEssenceDTO.
-     *
-     * @param songEssence La entidad SongEssence.
-     * @return Una instancia de SongEssenceDTO.
-     */
     public static SongEssenceDTO fromEntity(SongEssence songEssence) {
-        if (songEssence == null) {
-            return null;
-        }
+        if (songEssence == null) return null;
+        
         SongEssenceDTO dto = new SongEssenceDTO();
         dto.setId(songEssence.getId());
         dto.setSongName(songEssence.getSongName());
@@ -90,11 +83,6 @@ public class SongEssenceDTO {
         return dto;
     }
     
-    /**
-     * Convierte un SongEssenceDTO en una entidad SongEssence.
-     *
-     * @return Una instancia de SongEssence.
-     */
     public SongEssence toEntity() {
         SongEssence songEssence = new SongEssence();
         songEssence.setId(this.id);

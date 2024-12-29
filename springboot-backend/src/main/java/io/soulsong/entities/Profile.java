@@ -12,8 +12,8 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "avatar")
-    private String avatar; // Path or URL for the profile image
+    @Column(name = "avatarUrl")
+    private String avatarUrl; // Path or URL for the profile image
     
     @Column(name = "userName", nullable = false)
     private String userName;
@@ -35,12 +35,12 @@ public class Profile {
         this.id = id;
     }
     
-    public String getAvatar() {
-        return avatar;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
     
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
     
     public String getUserName() {

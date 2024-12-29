@@ -10,7 +10,7 @@ public class ProfileDTO {
     private Long id;
     private Long userId;
     private String userName;
-    private String avatar;
+    private String avatarUrl;
     private List<SongDTO> songs;
     
     public ProfileDTO() {}
@@ -39,19 +39,18 @@ public class ProfileDTO {
         this.userName = userName;
     }
     
-    public String getAvatar() {
-        return avatar;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
     
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
     
     public List<SongDTO> getSongs() {
         return songs;
     }
-    
-    public void setFavoriteSongs(List<SongDTO> songs) {
+    public void setSongs(List<SongDTO> songs) {
         this.songs = songs;
     }
     
@@ -67,8 +66,8 @@ public class ProfileDTO {
         dto.setId(profile.getId());
         dto.setUserId(profile.getUser().getId());
         dto.setUserName(profile.getUserName());
-        dto.setAvatar(profile.getAvatar());
-        dto.setFavoriteSongs(
+        dto.setAvatarUrl(profile.getAvatarUrl());
+        dto.setSongs(
               profile.getSongs().stream()
                     .map(SongDTO::fromEntity) // Conversión correcta
                     .collect(Collectors.toList())
@@ -81,8 +80,8 @@ public class ProfileDTO {
         dto.setId(profile.getId());
         dto.setUserId(profile.getUser().getId());
         dto.setUserName(profile.getUserName());
-        dto.setAvatar(profile.getAvatar());
-        dto.setFavoriteSongs(
+        dto.setAvatarUrl(profile.getAvatarUrl());
+        dto.setSongs(
               profile.getSongs().stream()
                     .map(SongDTO::fromEntity) // Conversión correcta
                     .collect(Collectors.toList())
@@ -101,6 +100,7 @@ public class ProfileDTO {
         entity.setId(profile.getId());
         entity.setUserId(profile.getUserId());
         entity.setUserName(profile.getUserName());
+        entity.setAvatarUrl(profile.getAvatarUrl());
         return entity;
     }
 }

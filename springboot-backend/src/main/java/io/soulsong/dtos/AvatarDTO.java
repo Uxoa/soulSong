@@ -3,7 +3,7 @@ package io.soulsong.dtos;
 // ImageProfileDTO
 public class AvatarDTO {
     private Long id;
-    private String mimeType;
+    private String avatarUrl;
     private String imageData; // Almacena como Base64
     
     public Long getId() {
@@ -14,19 +14,19 @@ public class AvatarDTO {
         this.id = id;
     }
     
-    public String getMimeType() {
-        return mimeType;
-    }
-    
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
-    }
-    
     public byte[] getImageData() {
         return imageData.getBytes();
     }
     
     public void setImageData(String imageData) {
         this.imageData = imageData;
+    }
+    
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+    
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

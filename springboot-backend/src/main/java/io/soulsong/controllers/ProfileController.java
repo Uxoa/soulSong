@@ -1,12 +1,12 @@
 package io.soulsong.controllers;
 
 import io.soulsong.dtos.ProfileDTO;
-import io.soulsong.entities.Profile;
 import io.soulsong.services.ProfileService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,6 +19,9 @@ public class ProfileController {
         this.profileService = profileService;
     }
     
+    /**
+     * Crear un nuevo perfil.
+     */
     @PostMapping
     public ResponseEntity<?> createProfile(@Valid @RequestBody ProfileDTO profileDTO) {
         try {
@@ -29,11 +32,17 @@ public class ProfileController {
         }
     }
     
+    /**
+     * Obtener todos los perfiles.
+     */
     @GetMapping
     public ResponseEntity<List<ProfileDTO>> getAllProfiles() {
         return ResponseEntity.ok(profileService.getAllProfiles());
     }
     
+    /**
+     * Obtener un perfil por ID.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ProfileDTO> getProfile(@PathVariable Long id) {
         return profileService.getProfile(id)
@@ -41,25 +50,25 @@ public class ProfileController {
               .orElse(ResponseEntity.notFound().build());
     }
     
+    /**
+     * Actualizar un perfil existente.
+     */
     @PutMapping("/{id}")
-    public ResponseEntity<ProfileDTO> editProfile(@PathVariable Long id, @Valid @RequestBody ProfileDTO profileDTO) {
-        return ResponseEntity.ok(profileService.updateProfile(id, profileDTO));
+    public ResponseEntity<ProfileDTO> updateProfile(@PathVariable Long id, @Valid @RequestBody ProfileDTO profileDTO) {
+        try {
+            ProfileDTO updatedProfile = profileService.updateProfile(id, profileDTO);
+            return ResponseEntity.ok(updatedProfile);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
     
+    /**
+     * Eliminar un perfil.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProfile(@PathVariable Long id) {
         profileService.deleteProfile(id);
         return ResponseEntity.noContent().build();
-    }
-    
-    @DeleteMapping("/{id}/empty-data")
-    public ResponseEntity<Void> emptyDataProfile(@PathVariable Long id) {
-        profileService.emptyDataProfile(id);
-        return ResponseEntity.noContent().build();
-    }
-    
-    @GetMapping("/match-profiles")
-    public List<Profile> matchProfiles(@RequestParam String trackId) {
-        return profileService.findCompatibleProfiles(trackId);
     }
 }

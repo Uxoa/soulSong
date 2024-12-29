@@ -1,5 +1,6 @@
 package io.soulsong.config;
 
+import com.github.javafaker.Faker;
 import io.soulsong.entities.Profile;
 import io.soulsong.entities.Song;
 import io.soulsong.entities.SongEssence;
@@ -16,7 +17,10 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 @Configuration
 public class InitFakeData {
@@ -35,59 +39,86 @@ public class InitFakeData {
                                 ProfileRepository profileRepository,
                                 SongEssenceRepository songEssenceRepository,
                                 SongRepository songRepository) {
-        // Crear y guardar usuario
-        User user1 = new User();
-        user1.setFirstname("John");
-        user1.setLastname("Doe");
-        user1.setBirthday(LocalDate.of(1990, 1, 1));
-        user1.setUsername("pericodelospalotes");
-        user1.setEmail("john.doe@example.com");
-        user1.setPassword("securepassword");
+        Faker faker = new Faker(new Locale("en-US"));
         
-        user1 = userRepository.save(user1);
-        logger.info("Usuario creado: {}", user1);
+        // Create random song essences
+        List<SongEssence> songEssences = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            SongEssence songEssence = createSongEssence(
+                  faker.rockBand().name(),
+                  faker.internet().uuid(),
+                  faker.number().randomDouble(2, 0, 1),  // Random danceability [0-1]
+                  faker.number().randomDouble(2, 0, 1),  // Random energy [0-1]
+                  faker.number().randomDouble(2, 0, 1),  // Random valence [0-1]
+                  faker.number().numberBetween(80, 200)  // Random tempo [80-200]
+            );
+            songEssences.add(songEssence);
+        }
+        songEssenceRepository.saveAll(songEssences);
+        logger.info("Canciones generadas: {}", songEssences);
         
-        // Crear perfil y asociarlo al usuario gestionado
-        Profile profile1 = new Profile();
-        profile1.setUserName("pericodelospalotes's Profile");
-        profile1.setAvatar("https://example.com/avatar/johndoe.png");
-        profile1.setUser(user1);
-        
-        profile1 = profileRepository.save(profile1);
-        logger.info("Perfil creado: {}", profile1);
-        
-        // Crear canciones
-        SongEssence song1 = new SongEssence();
-        song1.setSongName("Song 1");
-        song1.setDanceability(0.5);
-        song1.setEnergy(0.5);
-        song1.setValence(0.5);
-        song1.setTempo(120.0);
-        song1.setTrackId("track1");
-        
-        SongEssence song2 = new SongEssence();
-        song2.setSongName("Song 2");
-        song2.setDanceability(0.6);
-        song2.setEnergy(0.6);
-        song2.setValence(0.6);
-        song2.setTempo(130.0);
-        song2.setTrackId("track2");
-        
-        songEssenceRepository.saveAll(Arrays.asList(song1, song2));
-        logger.info("Canciones creadas: {} y {}", song1, song2);
-        
-        // Crear favoritos y asociarlos al perfil
-        Song favoriteSong1 = new Song();
-        favoriteSong1.setProfile(profile1);
-        favoriteSong1.setSongEssence(song1);
-        favoriteSong1.setAddedDate(LocalDateTime.now());
-        
-        Song favoriteSong2 = new Song();
-        favoriteSong2.setProfile(profile1);
-        favoriteSong2.setSongEssence(song2);
-        favoriteSong2.setAddedDate(LocalDateTime.now());
-        
-        songRepository.saveAll(Arrays.asList(favoriteSong1, favoriteSong2));
-        logger.info("Favoritos creados: {} y {}", favoriteSong1, favoriteSong2);
+        // Create random users, profiles, and their songs
+        for (int i = 1; i <= 10; i++) {
+            User user = createUser(
+                  faker.name().firstName(),
+                  faker.name().lastName(),
+                  faker.internet().emailAddress(),
+                  faker.name().username(),
+                  faker.date().birthday(18, 60).toInstant().atZone(ZoneId.systemDefault()).toLocalDate() // Random birthday
+            );
+            user = userRepository.save(user);
+            logger.info("Usuario generado: {}", user);
+            
+            // Use the old format for avatars (e.g., /images/avatar01.png)
+            String avatarUrl = String.format("/images/avatar%02d.png", i);
+            Profile profile = createProfile(user, faker.name().username(), avatarUrl);
+            profile = profileRepository.save(profile);
+            logger.info("Perfil generado: {}", profile);
+            
+            // Assign random songs to the profile
+            for (SongEssence songEssence : songEssences) {
+                Song song = createSong(profile, songEssence);
+                songRepository.save(song);
+                logger.info("Canción asignada al perfil {}: {}", profile.getId(), song);
+            }
+        }
+    }
+    
+    private User createUser(String firstname, String lastname, String email, String username, LocalDate birthday) {
+        User user = new User();
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setBirthday(birthday);
+        user.setPassword("securepassword"); // Default secure password
+        return user;
+    }
+    
+    private Profile createProfile(User user, String userName, String avatarUrl) {
+        Profile profile = new Profile();
+        profile.setUser(user);
+        profile.setUserName(userName);
+        profile.setAvatarUrl(avatarUrl); // Manage avatars with the old format
+        return profile;
+    }
+    
+    private SongEssence createSongEssence(String name, String trackId, double danceability, double energy, double valence, double tempo) {
+        SongEssence songEssence = new SongEssence();
+        songEssence.setSongName(name);
+        songEssence.setTrackId(trackId);
+        songEssence.setDanceability(danceability);
+        songEssence.setEnergy(energy);
+        songEssence.setValence(valence);
+        songEssence.setTempo(tempo);
+        return songEssence;
+    }
+    
+    private Song createSong(Profile profile, SongEssence songEssence) {
+        Song song = new Song();
+        song.setProfile(profile);
+        song.setSongEssence(songEssence);
+        song.setAddedDate(LocalDateTime.now());
+        return song;
     }
 }

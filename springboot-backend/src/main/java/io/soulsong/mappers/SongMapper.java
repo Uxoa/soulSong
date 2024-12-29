@@ -2,50 +2,46 @@ package io.soulsong.mappers;
 
 import io.soulsong.dtos.SongDTO;
 import io.soulsong.entities.Song;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SongMapper {
     
-    /**
-     * Convierte un DTO de FavoriteSong a una entidad.
-     * @param favoriteSongDTO El DTO de FavoriteSong.
-     * @return La entidad FavoriteSong.
-     */
-    public static Song toEntity(SongDTO favoriteSongDTO) {
-        if (favoriteSongDTO == null) {
+    private final SongEssenceMapper songEssenceMapper;
+    
+    public SongMapper(SongEssenceMapper songEssenceMapper) {
+        this.songEssenceMapper = songEssenceMapper;
+    }
+    
+    public Song toEntity(SongDTO songDTO) {
+        if (songDTO == null) {
             return null;
         }
         
-        Song favoriteSong = new Song();
-        favoriteSong.setId(favoriteSongDTO.getId());
-        favoriteSong.setAddedDate(favoriteSongDTO.getAddedDate());
-        
-        // Nota: `profile` y `songEssence` deben establecerse en el servicio.
-        return favoriteSong;
+        Song song = new Song();
+        song.setId(songDTO.getId());
+        song.setAddedDate(songDTO.getAddedDate());
+        // Las relaciones como Profile y SongEssence deben manejarse en el servicio
+        return song;
     }
     
-    /**
-     * Convierte una entidad FavoriteSong a un DTO.
-     * @param song La entidad FavoriteSong.
-     * @return El DTO de FavoriteSong.
-     */
-    public static SongDTO toDTO(Song song) {
+    public SongDTO toDTO(Song song) {
         if (song == null) {
             return null;
         }
         
         SongDTO songDTO = new SongDTO();
         songDTO.setId(song.getId());
+        songDTO.setAddedDate(song.getAddedDate());
         
         if (song.getProfile() != null) {
             songDTO.setProfileId(song.getProfile().getId());
         }
         
         if (song.getSongEssence() != null) {
-            songDTO.setSongEssence(SongEssenceMapper.toDTO(song.getSongEssence()));
-            songDTO.setTrackId(song.getSongEssence().getTrackId());
+            songDTO.setSongEssence(songEssenceMapper.toDTO(song.getSongEssence()));
         }
         
-        songDTO.setAddedDate(song.getAddedDate());
         return songDTO;
     }
 }
