@@ -1,3 +1,42 @@
+export interface SongEssence {
+  id: number;
+  songName: string;
+  description: string;
+  trackId: string;
+  danceability: number;
+  energy: number;
+  tempo: number;
+  valence: number;
+}
+
+export interface SongDTO {
+  id: number;
+  profileId: number;
+  songTitle: string | null;
+  songEssence: SongEssence | null;
+}
+
+export interface ProfileDTO {
+  id: number;
+  userName: string;
+  avatarUrl: string;
+  email: string;
+  favoriteSong?: SongEssence;
+  songs: Array<{ id: number; name: string; description: string }>;
+  songEssences: SongEssence[];
+}
+
+export interface Profile {
+  id: number;
+  name: string;
+  avatarUrl: string;
+  email: string;
+  favoriteSong?: SongEssence;
+  songs: Array<{ id: number; name: string; description: string }>;
+  songEssences: SongEssence[];
+}
+
+
 export interface User {
   id: number;
   username: string;
@@ -12,24 +51,9 @@ export interface UserDTO {
   email: string;
   favoriteSongs: string[];
 }
-export interface SongDTO {
-  id: number;
-  name: string;
-  description: string;
-}
 
-export interface Profile {
-  id: number;
-  name: string;
-  avatarUrl?: string;
-  favoriteSong?: string;
-}
-
-export interface ProfileDTO {
-  name: string;
+export interface UserLoginDTO {
   email: string;
-  imageUrl?: string;
-  bio?: string;
-  avatar: string;
-  songs: SongDTO[];
+  password: string;
 }
+

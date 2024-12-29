@@ -1,0 +1,56 @@
+/* Contenedor principal de la tarjeta */
+.profile-card {
+    background: linear-gradient(135deg, #1f1c2c, #1cb5e0);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    max-width: 600px;
+}
+
+/* Imagen del avatar */
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Nombre del perfil */
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #00e6e6;
+}
+
+/* Canción favorita */
+.profile-favorite {
+    font-size: 1rem;
+    color: #b8c1ec;
+    margin-bottom: 1rem;
+}
+
+/* Botón de acción */
+.profile-button {
+    background-color: #00e6e6;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: #00b4b4;
+}
+
+/* Hover en la tarjeta */
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}

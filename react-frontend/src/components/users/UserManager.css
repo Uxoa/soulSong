@@ -53,6 +53,10 @@
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
+.header-icons .icon img {
+   width:50px;
+}
+
 .header-icons .icon:hover {
     transform: scale(1.2);
     color: #f39c12;

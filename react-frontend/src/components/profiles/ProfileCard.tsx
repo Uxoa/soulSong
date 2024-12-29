@@ -1,15 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./ProfileManager.css";
+import "./ProfileCard.css";
+import { SongEssence } from "../../types";
 
 type ProfileCardProps = {
-    id: string;
-    name: string;
-    imageUrl: string;
-    favoriteSong?: string;
+    id: number;
+    userName: string;
+    avatarUrl: string;
+    favoriteSong?: SongEssence;
 };
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ id, name, imageUrl, favoriteSong }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ id, userName, favoriteSong }) => {
     const navigate = useNavigate();
 
     const handleViewProfile = () => {
@@ -17,18 +18,20 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ id, name, imageUrl, favoriteS
     };
 
     return (
-        <div className="user-card">
-            <div className="user-status online"></div>
+        <div className="profile-card">
+            <div className="profile-status online"></div>
             <img
-                src={imageUrl}
-                alt={`${name}'s profile`}
-                className="profile-image"
+                src="/images/avatar01.png"
+                alt={`${userName}'s profile`}
+                className="profile-picture"
             />
-            <h3>{name}</h3>
-            <p>{favoriteSong ? `🎵 ${favoriteSong}` : "No favorite song"}</p>
+            <h3 className="profile-name">{userName}</h3>
+            <p className="profile-song">
+                {favoriteSong?.songName ? `🎵 ${favoriteSong.songName}` : "No favorite song"}
+            </p>
             <div className="card-actions">
-                <button className="edit-button" onClick={handleViewProfile}>
-                    View
+                <button className="view-button" onClick={handleViewProfile}>
+                    View Profile
                 </button>
             </div>
         </div>

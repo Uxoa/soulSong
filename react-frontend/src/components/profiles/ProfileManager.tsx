@@ -1,32 +1,42 @@
-import React from "react";
-import useProfiles from "../../hooks/useProfiles"; // Hook para obtener perfiles
+import React, { useEffect, useState } from "react";
 import ProfileCard from "./ProfileCard";
+import profileService from "../../api-services/profiles.services";
+import { Profile } from "../../types";
 import "./ProfileManager.css";
 
 const ProfileManager: React.FC = () => {
-    const { profiles, loading, error } = useProfiles();
+    const [profiles, setProfiles] = useState<Profile[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchProfiles = async () => {
+            try {
+                const response = await profileService.getProfiles();
+                setProfiles(response);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "An error occurred");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfiles();
+    }, []);
 
     if (loading) return <p>Loading profiles...</p>;
     if (error) return <p>Error loading profiles: {error}</p>;
 
     return (
-        <div className="user-manager-container">
-            <header className="user-manager-header">
-                <h2>Explore Profiles</h2>
-                <div className="header-icons">
-                    <span className="icon">🔍</span>
-                    <span className="icon">🔔</span>
-                    <span className="icon">⋮</span>
-                </div>
-            </header>
-            <div className="user-manager-grid">
+        <div className="profile-manager">
+            <h1>User Profiles</h1>
+            <div className="profile-cards">
                 {profiles.map((profile) => (
                     <ProfileCard
                         key={profile.id}
                         id={profile.id}
-                        name={profile.name}
-                        imageUrl={profile.imageUrl}
-                        favoriteSong={profile.favoriteSong?.name}
+                        userName={profile.name}
+                        avatarUrl={profile.avatarUrl}
                     />
                 ))}
             </div>
