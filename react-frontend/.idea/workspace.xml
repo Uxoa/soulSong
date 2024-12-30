@@ -5,23 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5a66f66-d540-4c5c-9026-9e8e52596357" name="Changes" comment="Feat: upgrading frontend files">
-      <change afterPath="$PROJECT_DIR$/src/components/profiles/ProfileCard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-services/analizeSongs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-services/analizeSongs.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api-services/profiles.services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-services/profiles.services.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api-services/songEssence.service.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/api-services/songEssence.service.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileCard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileManager.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileManager.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileManager.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileManager.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileView.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/profiles/ProfileView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profiles/ProfileView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/users/UserManager.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/users/UserManager.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/songs/SongAnalizer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/songs/SongAnalizer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/useProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useProfile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/config/InitFakeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/AvatarDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/dtos/AvatarDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/entities/Avatar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/entities/Avatar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/AvatarMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/mappers/AvatarMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/SongEssenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot-backend/src/main/java/io/soulsong/services/SongEssenceService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +36,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
         <option value="CSS File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -74,35 +73,35 @@
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.index.ts.executor": "Run",
-    "Node.js.useProfiles.ts.executor": "Run",
-    "Node.js.vite.config.ts.executor": "Run",
-    "Notification.DisplayName-DoNotAsk-AMII Info": "AMII Info",
-    "Notification.DoNotAsk-AMII Info": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "mpv",
-    "ignore.preview.features.used": "true",
-    "jsx.switch.disabled": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong/react-frontend",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.completion",
-    "ts.external.directory.path": "/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong/react-frontend/node_modules/typescript/lib",
-    "ts.rename.search.for.dynamic.occurrences": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.index.ts.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.useProfiles.ts.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.vite.config.ts.executor&quot;: &quot;Run&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-AMII Info&quot;: &quot;AMII Info&quot;,
+    &quot;Notification.DoNotAsk-AMII Info&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mpv&quot;,
+    &quot;ignore.preview.features.used&quot;: &quot;true&quot;,
+    &quot;jsx.switch.disabled&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong/react-frontend&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/paloma/Downloads/0-bootCampAWSF5/javaf5/exercices/springBoot/soulsong/react-frontend/node_modules/typescript/lib&quot;,
+    &quot;ts.rename.search.for.dynamic.occurrences&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -181,7 +180,9 @@
       <workItem from="1734999116457" duration="1077000" />
       <workItem from="1735204566061" duration="9363000" />
       <workItem from="1735312253585" duration="12063000" />
-      <workItem from="1735341549710" duration="37629000" />
+      <workItem from="1735341549710" duration="42891000" />
+      <workItem from="1735437650747" duration="7191000" />
+      <workItem from="1735513212188" duration="10425000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: upgrading frontend files">
       <option name="closed" value="true" />

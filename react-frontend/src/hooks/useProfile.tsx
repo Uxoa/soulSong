@@ -11,46 +11,44 @@ const useProfile = (id: string) => {
         const fetchProfile = async () => {
             try {
                 setLoading(true);
-                const numericId = parseInt(id, 10);
-                if (isNaN(numericId)) throw new Error("Invalid profile ID");
 
+                // Validación del ID
+                const numericId = parseInt(id, 10);
+                if (isNaN(numericId)) {
+                    throw new Error("Invalid profile ID");
+                }
+
+                // Obtener datos del backend
                 const profileDTO: ProfileDTO = await profileService.getProfile(numericId);
 
-                // Mapeo explícito de ProfileDTO a Profile
+                // Mapear datos del DTO a Profile
                 const mappedProfile: Profile = {
                     id: profileDTO.id,
-                    name: profileDTO.userName,
-                    avatarUrl: profileDTO.avatar,
+                    name: profileDTO.userName || "Unknown Name",
+                    avatarUrl: profileDTO.avatarUrl || "/images/default-avatar.png",
                     email: profileDTO.user?.email || "No email available",
-                    favoriteSong: profileDTO.songs?.[0]?.songEssence
-                        ? {
-                            id: profileDTO.songs[0].songEssence.id,
-                            songName: profileDTO.songs[0].songEssence.songName,
-                            description: profileDTO.songs[0].songEssence.description,
-                            trackId: profileDTO.songs[0].songEssence.trackId,
-                            danceability: profileDTO.songs[0].songEssence.danceability,
-                            energy: profileDTO.songs[0].songEssence.energy,
-                            tempo: profileDTO.songs[0].songEssence.tempo,
-                            valence: profileDTO.songs[0].songEssence.valence,
-                        }
-                        : undefined,
-                    songs: profileDTO.songs.map((song) => ({
+                    songs: profileDTO.songs?.map((song) => ({
                         id: song.id,
                         name: song.songEssence?.songName || "Unknown Song",
-                        description: song.songEssence?.description || "",
-                    })),
+                        description: song.songEssence?.description || "No description provided",
+                        trackId: song.songEssence?.trackId || "No track ID available",
+                        danceability: song.songEssence?.danceability || 0,
+                        energy: song.songEssence?.energy || 0,
+                        tempo: song.songEssence?.tempo || 0,
+                        valence: song.songEssence?.valence || 0,
+                    })) || [],
                     songEssences: profileDTO.songs
-                        .filter((song) => song.songEssence)
+                        ?.filter((song) => song.songEssence) // Filtrar solo canciones con SongEssence
                         .map((song) => ({
                             id: song.songEssence!.id,
                             songName: song.songEssence!.songName,
-                            description: song.songEssence!.description,
+                            description: song.songEssence!.description || "No description available",
                             trackId: song.songEssence!.trackId,
                             danceability: song.songEssence!.danceability,
                             energy: song.songEssence!.energy,
                             tempo: song.songEssence!.tempo,
                             valence: song.songEssence!.valence,
-                        })),
+                        })) || [],
                 };
 
                 setProfile(mappedProfile);

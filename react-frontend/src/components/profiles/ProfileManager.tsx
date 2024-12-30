@@ -13,7 +13,18 @@ const ProfileManager: React.FC = () => {
         const fetchProfiles = async () => {
             try {
                 const response = await profileService.getProfiles();
-                setProfiles(response);
+                const mappedProfiles: Profile[] = response.map((profile: any) => ({
+                    id: profile.id,
+                    name: profile.name,
+                    avatarUrl: profile.avatarUrl || "/images/avatar03.png", // Default avatar
+                    email: profile.email || "No email provided", // Default email
+                    songs: profile.songs.map((song: any) => ({
+                        id: song.id,
+                        name: song.name || "Unknown Title", // Default song name
+                    })),
+                    song: [], // Provide an empty array for `song` if not available
+                }));
+                setProfiles(mappedProfiles);
             } catch (err) {
                 setError(err instanceof Error ? err.message : "An error occurred");
             } finally {
@@ -36,7 +47,8 @@ const ProfileManager: React.FC = () => {
                         key={profile.id}
                         id={profile.id}
                         userName={profile.name}
-                        avatarUrl={profile.avatarUrl}
+                        avatarUrl={profile.avatarUrl} // Pass avatarUrl to ProfileCard
+                        songs={profile.songs}
                     />
                 ))}
             </div>

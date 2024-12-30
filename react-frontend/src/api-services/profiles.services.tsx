@@ -4,11 +4,21 @@ import { Profile, ProfileDTO } from "../types";
 const profileService = {
   getProfiles: async (): Promise<Profile[]> => {
     const response = await axiosInstance.get<Profile[]>("/profiles");
-    return response.data;
+    return response.data.map((profileDTO: ProfileDTO) => ({
+      id: profileDTO.id,
+      name: profileDTO.userName,
+      avatarUrl: profileDTO.avatarUrl || "/images/default-avatar.png", // Avatar predeterminado
+      email: profileDTO.user?.email || "No email available",
+      songs: profileDTO.songs?.map((song) => ({
+        id: song.id,
+        name: song.songEssence?.songName || "Unknown Song",
+        description: song.songEssence?.description || "",
+      })) || [],
+    }));
   },
   getProfile: async (id: number): Promise<ProfileDTO> => {
     const response = await axiosInstance.get<ProfileDTO>(`/profiles/${id}`);
-    return response.data; // Devuelve directamente el objeto ProfileDTO
+    return response.data;
   },
   createProfile: async (profile: Omit<ProfileDTO, "id">): Promise<ProfileDTO> => {
     const response = await axiosInstance.post<ProfileDTO>("/profiles", profile);
