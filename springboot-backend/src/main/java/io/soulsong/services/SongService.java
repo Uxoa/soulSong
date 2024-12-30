@@ -50,4 +50,16 @@ public class SongService {
         
         return songMapper.toDTO(savedSong).getSongEssence();
     }
+    
+    
+    public String analyzeDescription(SongEssence songEssence) {
+        // Crear una descripción básica en función de los atributos
+        return String.format(
+              "A song with a tempo of %.1f BPM, %.2f energy, and %.2f danceability. It feels %s.",
+              songEssence.getTempo(),
+              songEssence.getEnergy(),
+              songEssence.getDanceability(),
+              songEssence.getValence() > 0.5 ? "positive" : "melancholic"
+        );
+    }
 }

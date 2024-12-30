@@ -1,7 +1,9 @@
 package io.soulsong.services;
 
 import io.soulsong.dtos.ProfileDTO;
+import io.soulsong.dtos.SongDTO;
 import io.soulsong.entities.Profile;
+import io.soulsong.entities.SongEssence;
 import io.soulsong.entities.User;
 import io.soulsong.mappers.ProfileMapper;
 import io.soulsong.mappers.SongEssenceMapper;
@@ -97,14 +99,35 @@ public class ProfileService {
               .collect(Collectors.toList());
     }
     
+    @Transactional
     public Optional<ProfileDTO> getProfile(Long id) {
         return profileRepository.findById(id)
               .map(profile -> {
                   ProfileDTO profileDTO = profileMapper.toDTO(profile);
+                  
+                  // Generar descripciones para cada SongEssence
+                  profileDTO.setSongs(
+                        profile.getSongs().stream()
+                              .map(song -> {
+                                  if (song.getSongEssence() != null) {
+                                      SongEssence essence = song.getSongEssence();
+                                      
+                                      // Si la descripción no existe, generar una nueva
+                                      if (essence.getDescription() == null || essence.getDescription().isEmpty()) {
+                                          String description = songEssenceService.analyzeDescription(essence);
+                                          essence.setDescription(description);
+                                      }
+                                  }
+                                  return songMapper.toDTO(song);
+                              })
+                              .collect(Collectors.toList())
+                  );
+                  
                   profileDTO.setAvatarUrl(buildAvatarUrl(profile.getAvatarUrl()));
                   return profileDTO;
               });
     }
+    
     
     private String buildAvatarUrl(String avatar) {
         if (avatar == null || avatar.isEmpty()) {

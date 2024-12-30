@@ -11,6 +11,7 @@ public class SongEssenceDTO {
     private Double energy; // Característica de la canción
     private Double tempo; // Característica de la canción
     private Double valence; // Característica de la canción
+    private String description;
     
     // Getters y Setters
     public Long getId() {
@@ -69,6 +70,11 @@ public class SongEssenceDTO {
         this.valence = valence;
     }
     
+    
+    public String getDescription() {
+       return description;
+    }
+    
     public static SongEssenceDTO fromEntity(SongEssence songEssence) {
         if (songEssence == null) return null;
         
@@ -93,5 +99,9 @@ public class SongEssenceDTO {
         songEssence.setTempo(this.tempo);
         songEssence.setValence(this.valence);
         return songEssence;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

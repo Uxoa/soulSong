@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/profiles")
@@ -44,10 +45,9 @@ public class ProfileController {
      * Obtener un perfil por ID.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ProfileDTO> getProfile(@PathVariable Long id) {
-        return profileService.getProfile(id)
-              .map(ResponseEntity::ok)
-              .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Optional<ProfileDTO>> getProfile(@PathVariable Long id) {
+        Optional<ProfileDTO> profileDTO = profileService.getProfile(id);
+        return ResponseEntity.ok(profileDTO);
     }
     
     /**

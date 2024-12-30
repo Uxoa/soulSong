@@ -28,13 +28,18 @@ public class SongEssence {
     @Column(name = "valence")
     private Double valence;
     
+    @Column(name = "description")
+    private String description;
+    
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private Profile profile;
     
     public SongEssence() {}
     
-    public SongEssence(Long id, String trackId, String songName, Double danceability, Double energy, Double tempo, Double valence, Profile profile) {
+    public SongEssence(Long id, String trackId, String songName, Double danceability,
+                       Double energy, Double tempo, Double valence,
+                       String description, Profile profile) {
         this.id = id;
         this.trackId = trackId;
         this.songName = songName;
@@ -42,6 +47,7 @@ public class SongEssence {
         this.energy = energy;
         this.tempo = tempo;
         this.valence = valence;
+        this.description = description;
         this.profile = profile;
     }
     
@@ -102,6 +108,14 @@ public class SongEssence {
     
     public void setValence(Double valence) {
         this.valence = valence;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     public Profile getProfile() {

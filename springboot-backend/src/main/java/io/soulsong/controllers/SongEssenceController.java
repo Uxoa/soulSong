@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/songs")
@@ -17,21 +18,15 @@ public class SongEssenceController {
         this.songEssenceService = songEssenceService;
     }
     
-    @GetMapping
-    public ResponseEntity<List<SongEssenceDTO>> getAll() {
-        return ResponseEntity.ok(songEssenceService.getAll());
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<SongEssenceDTO> getById(@PathVariable Long id) {
-        return songEssenceService.getById(id)
-              .map(ResponseEntity::ok)
-              .orElse(ResponseEntity.notFound().build());
-    }
-    
-    @PostMapping
-    public ResponseEntity<SongEssenceDTO> create(@RequestBody SongEssenceDTO songEssenceDTO) {
-        SongEssenceDTO created = songEssenceService.createSongEssence(songEssenceDTO);
-        return ResponseEntity.ok(created);
+    /**
+     * Endpoint para analizar una canción.
+     *
+     * @param trackId El ID de la canción.
+     * @return Atributos de SongEssence y una descripción generada.
+     */
+    @GetMapping("/analyze/{trackId}")
+    public ResponseEntity<Map<String, Object>> analyzeSong(@PathVariable String trackId) {
+        Map<String, Object> result = songEssenceService.analyzeSongWithAI(trackId);
+        return ResponseEntity.ok(result);
     }
 }

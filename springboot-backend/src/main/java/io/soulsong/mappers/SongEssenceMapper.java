@@ -6,9 +6,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SongEssenceMapper {
-    
-    public static SongMapper getInstance() {
-        return new SongMapper( new SongEssenceMapper() );
+    public SongEssenceDTO toDTO(SongEssence songEssence) {
+        if (songEssence == null) {
+            return null;
+        }
+        
+        SongEssenceDTO dto = new SongEssenceDTO();
+        dto.setId(songEssence.getId());
+        dto.setSongName(songEssence.getSongName());
+        dto.setTrackId(songEssence.getTrackId());
+        dto.setDanceability(songEssence.getDanceability());
+        dto.setEnergy(songEssence.getEnergy());
+        dto.setTempo(songEssence.getTempo());
+        dto.setValence(songEssence.getValence());
+        dto.setDescription(songEssence.getDescription()); // Incluir la descripción
+        return dto;
     }
     
     public SongEssence toEntity(SongEssenceDTO dto) {
@@ -24,22 +36,7 @@ public class SongEssenceMapper {
         songEssence.setEnergy(dto.getEnergy());
         songEssence.setTempo(dto.getTempo());
         songEssence.setValence(dto.getValence());
+        songEssence.setDescription(dto.getDescription()); // Incluir la descripción
         return songEssence;
-    }
-    
-    public SongEssenceDTO toDTO(SongEssence songEssence) {
-        if (songEssence == null) {
-            return null;
-        }
-        
-        SongEssenceDTO dto = new SongEssenceDTO();
-        dto.setId(songEssence.getId());
-        dto.setSongName(songEssence.getSongName());
-        dto.setTrackId(songEssence.getTrackId());
-        dto.setDanceability(songEssence.getDanceability());
-        dto.setEnergy(songEssence.getEnergy());
-        dto.setTempo(songEssence.getTempo());
-        dto.setValence(songEssence.getValence());
-        return dto;
     }
 }
